@@ -298,15 +298,30 @@
     /* 价格计算器 */
     .price-calculator {
         background: rgba(0, 0, 0, 0.5);
-        padding: 3rem;
+        padding: 2rem;
         border-radius: 8px;
-        margin: 4rem 0;
-        text-align: center;
+        margin: 2rem 0;
     }
 
     .price-display {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .price-display > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .total-price {
         font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        border-bottom: none !important;
     }
 
     /* 相关产品 */
@@ -543,72 +558,50 @@
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- 更新导航栏部分 -->
     <header class="main-header">
         <div class="container">
-            <div class="logo">
-                <a href="../index.html">
-                    <img src="../images/starbboard up.png" alt="TideMaster Marine Technology" class="logo-img" style="max-width: 150px;">
-                </a>
-            </div>
+            <!-- Logo -->
+            <a href="../index.html" class="logo">
+                <img src="../images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+            </a>
+
+            <!-- 主导航 -->
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li class="nav-item dropdown">
-                        <a href="../index.html#boat-range">Boat Series</a>
-                        <div class="dropdown-menu">
-                            <div class="menu-content">
-                                <ul class="menu-list">
-                                    <li><a href="TideMaster Cat.html">TIDEMASTER CAT</a></li>
-                                    <li><a href="TideMaster Hyper.html">TIDEMASTER HYPER</a></li>
-                                    <li><a href="TideMaster Leisure.html">TIDEMASTER LEISURE</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="../index.html#why-navier">Why TideMaster</a></li>
-                    <li><a href="../index.html#about">About Us</a></li>
-                    <li><a href="../index.html#videos">Videos & News</a></li>
-                    <li><a href="../index.html#dealers">Dealers</a></li>
+                    <li><a href="../products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                    <li><a href="../index.html#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="#contact">BECOME DEALER</a></li>
                 </ul>
             </nav>
+
+            <!-- 右侧操作区 -->
             <div class="header-actions">
                 <div class="dropdown">
-                    <a href="#" class="btn btn-primary">BUILD YOUR BOAT</a>
-                    <div class="build-menu">
-                        <div class="menu-content">
-                            <ul class="menu-list">
-                                <li><a href="TideMaster Cat.html">TideMaster Cat 38</a></li>
-                                <li><a href="TideMaster Hyper.html">TideMaster Hyper 38</a></li>
-                                <li><a href="TideMaster Leisure.html">TideMaster Leisure 43</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <a href="../products/TideMaster Cat.html" class="btn btn-primary build-btn">
+                        BUILD YOUR BOAT
+                    </a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- 产品英雄区域 -->
-    <section class="product-hero">
-        <div class="container">
-            <h1>TIDEMASTER CAT Series</h1>
-            <p>Stable, Reliable, Energy-Efficient</p>
-        </div>
-    </section>
+
 
     <!-- 产品详情 -->
     <main class="product-detail">
         <div class="container">
             <!-- 产品标题 -->
             <div class="product-header">
-<h1>TIDEMASTER Cat 38</h1>
+                <h1>TIDEMASTER Cat 38</h1>
                 <p class="product-tagline">Stable, Reliable, Energy-Efficient</p>
             </div>
 
             <!-- 产品图片展示 -->
             <section class="product-gallery">
                 <div class="main-image">
-                    <img src="../images\starbboard up.png" alt="38英尺双体船主图">
+                    <img src="../images\_20250102145728.jpg" alt="38英尺双体船主图">
                 </div>
                 <div class="thumbnails">
                     <img src="../images\starboard.png" alt="38英尺双体船图片1">
@@ -706,7 +699,7 @@
                                 <div class="option-content">
                                     <span class="option-title">Open Bow Design: </span>
                                     <span class="option-description">Spacious front deck layout</span>
-                    </div>
+                                </div>
                             </label>
                         </div>
                         <div class="config-option">
@@ -842,9 +835,9 @@
                                 <div class="option-content">
                                     <span class="option-title">14pcs Drink Cup Holders: </span>
                                     <span class="option-description">Conveniently placed throughout the boat</span>
-                    </div>
+                                </div>
                             </label>
-                </div>
+                        </div>
                         <div class="config-option">
                             <label>
                                 <input type="checkbox" checked>
@@ -930,8 +923,7 @@
                                     <span class="option-description">Complete set including docking lights and Anchor light</span>
                                 </div>
                             </label>
-                    </div>
-
+                        </div>
                     </div>
 
                     <!-- 安全设备 -->
@@ -952,9 +944,9 @@
                                 <div class="option-content">
                                     <span class="option-title">38MM Diameter Aluminum Alloy Handrails: </span>
                                     <span class="option-description">Sturdy safety rails throughout bow area</span>
-                    </div>
+                                </div>
                             </label>
-                    </div>
+                        </div>
                         <div class="config-option">
                             <label>
                                 <input type="checkbox" checked>
@@ -1007,7 +999,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 250HP V8</span>
                                     <span class="option-description">Total power output: 500HP</span>
                                 </div>
-                                <span class="option-price">$15,000</span>
+                                <span class="option-price">$60,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1017,7 +1009,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 300HP V8</span>
                                     <span class="option-description">Total power output: 600HP</span>
                                 </div>
-                                <span class="option-price">$18,000</span>
+                                <span class="option-price">$70,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1026,8 +1018,8 @@
                                 <div class="option-content">
                                     <span class="option-title">Twin MERCURY VERADO 350HP</span>
                                     <span class="option-description">Total power output: 700HP</span>
-                    </div>
-                    <span class="option-price">$20,000</span>
+                                </div>
+                                <span class="option-price">$78,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1037,7 +1029,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 400HP</span>
                                     <span class="option-description">Total power output: 800HP</span>
                                 </div>
-                                <span class="option-price">$28,000</span>
+                                <span class="option-price">$92,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1047,7 +1039,7 @@
                                     <span class="option-title">MERCURY VERADO 400R</span>
                                     <span class="option-description">High performance racing engine</span>
                                 </div>
-                                <span class="option-price">$35,000</span>
+                                <span class="option-price">$100,000</span>
                             </label>
                         </div>
                     </div>
@@ -1066,13 +1058,13 @@
                                 <input type="radio" name="nav-package" value="garmin-sport">
                             </label>
                             <span class="package-price">$18,000</span>
-                </div>
+                        </div>
                         <div class="col-package">
                             <div>GARMIN PRO</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="garmin-pro">
                             </label>
-                            <span class="package-price">$25,000</span>
+                            <span class="package-price">$55,000</span>
                         </div>
                         <div class="col-package">
                             <div>RAYMARINE SPORT</div>
@@ -1086,21 +1078,21 @@
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="raymarine-pro">
                             </label>
-                            <span class="package-price">$28,000</span>
+                            <span class="package-price">$68,000</span>
                         </div>
                         <div class="col-package">
                             <div>TIDEMASTER + Garmin Combo</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="tidemaster-sport">
                             </label>
-                            <span class="package-price">$20,000</span>
+                            <span class="package-price">$50,000</span>
                         </div>
                         <div class="col-package">
                             <div>TIDEMASTER + Raymarine Combo</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="tidemaster-pro">
                             </label>
-                            <span class="package-price">$28,000</span>
+                            <span class="package-price">$58,000</span>
                         </div>
                     </div>
 
@@ -1233,21 +1225,21 @@
                         <div class="config-group">
                             <h3>Lighting & Vision</h3>
                             <div class="config-option">
-                            <label>
+                                <label>
                                     <input type="checkbox">
                                     <div class="option-content">
-                                    <span class="option-title">T-Top froward LED light bar</span>
+                                        <span class="option-title">T-Top froward LED light bar</span>
                                     </div>
                                     <span class="option-price">$700</span>
-                            </label>
-                        </div>
+                                </label>
+                            </div>
                             <div class="config-option">
-                            <label>
+                                <label>
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">T-Top aft LED Light Bar</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$300</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1265,31 +1257,31 @@
                                     <div class="option-content">
                                         <span class="option-title">Upgraded NightVision: FLIR CAMERA - M364C - STABILIZED 9HZ THERMAL CAMERA WITH JOYSTICK</span>
                                     </div>
-                                    <span class="option-price">$700</span>
-                            </label>
+                                    <span class="option-price">$20,000</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
                         <!-- 甲板和船体 -->
                         <div class="config-group">
                             <h3>Deck & Hull</h3>
                             <div class="config-option">
-                            <label>
+                                <label>
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Twin Hull Side Door</span>
                                     </div>
-                                    <span class="option-price">$700</span>
-                            </label>
-                        </div>
+                                    <span class="option-price">$1700</span>
+                                </label>
+                            </div>
                             <div class="config-option">
-                            <label>
+                                <label>
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Teak Deck Material</span>
                                     </div>
-                                    <span class="option-price">$700</span>
-                            </label>
+                                    <span class="option-price">$2700</span>
+                                </label>
                             </div>
                             <div class="config-option">
                                 <label>
@@ -1306,7 +1298,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Trim Tabs</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$1700</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1315,7 +1307,7 @@
                                     <div class="option-content">
                                         <span class="option-title">38MM Stainless Steel Handrails</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$2700</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1324,7 +1316,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Scuba Tank Storage Area</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$1700</span>
                                 </label>
                             </div>
                         </div>
@@ -1340,8 +1332,8 @@
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">T-Top Solar Charging Kit</span>
-                </div>
-                                    <span class="option-price">$700</span>
+                                    </div>
+                                    <span class="option-price">$900</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1350,7 +1342,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Gyro Stabilizer</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$20,000</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1359,7 +1351,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Extended Lithium Battery Pack</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$5700</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1368,7 +1360,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Autonomous Navigation System</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$30,000</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1390,8 +1382,8 @@
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Aerogel Insulation Layer</span>
-                </div>
-                                    <span class="option-price">$700</span>
+                                    </div>
+                                    <span class="option-price">$2300</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1400,7 +1392,7 @@
                                     <div class="option-content">
                                         <span class="option-title">10KG Stainless Steel Anchor with Chain and Rope</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1408,9 +1400,8 @@
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Sound System (8 Speakers)</span>
-
-                    </div>
-                                    <span class="option-price">$700</span>
+                                    </div>
+                                    <span class="option-price">$1200</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1418,9 +1409,8 @@
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Upgraded Radar</span>
-
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$8900</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1428,9 +1418,8 @@
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Electric Windlass</span>
-
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">$3200</span>
                                 </label>
                             </div>
                         </div>
@@ -1438,35 +1427,98 @@
                 </div>
             </section>
 
-            <!-- 价格计算器 -->
+            <!-- 提交订单 -->
             <section class="submit-order-section">
-                <button class="btn btn-primary" onclick="showOrderConfirmation()">Submit your order</button>
+                <form id="orderForm" action="../submit-order.html" method="GET">
+                    <input type="hidden" id="selectedEngine" name="engine">
+                    <input type="hidden" id="selectedEnginePrice" name="enginePrice">
+                    <input type="hidden" id="selectedNav" name="nav">
+                    <input type="hidden" id="selectedNavPrice" name="navPrice">
+                    <input type="hidden" id="selectedAccessories" name="accessories">
+                    <input type="hidden" id="selectedAccessoriesPrice" name="accessoriesPrice">
+                    <input type="hidden" id="finalTotalPrice" name="totalPrice">
+                    
+                    <button type="button" class="btn btn-primary" onclick="collectFormData()">Submit Order</button>
+                </form>
+
+                <script>
+                function collectFormData() {
+                    const basePrice = 120000;
+                    let totalPrice = basePrice;
+
+                    // 收集发动机信息
+                    const selectedEngine = document.querySelector('input[name="engine"]:checked');
+                    if (selectedEngine) {
+                        const engineOption = selectedEngine.closest('.config-option');
+                        const engineTitle = engineOption.querySelector('.option-title').textContent;
+                        const enginePriceText = engineOption.querySelector('.option-price').textContent;
+                        const enginePrice = parseInt(enginePriceText.replace(/[^0-9]/g, ''));
+                        
+                        document.getElementById('selectedEngine').value = engineTitle;
+                        document.getElementById('selectedEnginePrice').value = enginePrice;
+                        totalPrice += enginePrice;
+                    }
+
+                    // 收集导航系统信息
+                    const selectedNav = document.querySelector('input[name="nav-package"]:checked');
+                    if (selectedNav) {
+                        const navPackage = selectedNav.closest('.col-package');
+                        const navTitle = navPackage.querySelector('div').textContent;
+                        const navPriceText = navPackage.querySelector('.package-price').textContent;
+                        const navPrice = parseInt(navPriceText.replace(/[^0-9]/g, ''));
+                        
+                        document.getElementById('selectedNav').value = navTitle;
+                        document.getElementById('selectedNavPrice').value = navPrice;
+                        totalPrice += navPrice;
+                    }
+
+                    // 收集配件信息
+                    const selectedAccessories = Array.from(document.querySelectorAll('.optional-accessories input[type="checkbox"]:checked'))
+                        .map(checkbox => {
+                            const option = checkbox.closest('.config-option');
+                            const title = option.querySelector('.option-title').textContent;
+                            const priceText = option.querySelector('.option-price').textContent;
+                            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+                            return { title, price };
+                        });
+                    
+                    const accessoriesTotal = selectedAccessories.reduce((sum, item) => sum + item.price, 0);
+                    document.getElementById('selectedAccessories').value = JSON.stringify(selectedAccessories);
+                    document.getElementById('selectedAccessoriesPrice').value = accessoriesTotal;
+                    totalPrice += accessoriesTotal;
+
+                    // 设置总价
+                    document.getElementById('finalTotalPrice').value = totalPrice;
+
+                    // 提交表单
+                    document.getElementById('orderForm').submit();
+                }
+                </script>
             </section>
 
             <!-- 相关产品 -->
-          
         </div>
     </main>
 
     <!-- 页脚 -->
     <footer class="main-footer">
-            <div class="footer-content">
+        <div id="contact" class="footer-content">
             <div class="footer-section company-info">
                 <div class="footer-logo">
-                    <img src="../images/starbboard up.png" alt="TideMaster Marine Technology" class="logo-img" style="max-width: 120px;">
+                    <img src="../images/Logo.jpg" alt="TideMaster Marine Technology" class="logo-img" style="max-width: 120px;">
                     <span class="logo-text">TideMaster Marine Technology</span>
                 </div>
                 <p class="company-desc">
                     UAE Dubai TideMaster Marine Technology specializes in developing high-quality aluminum yachts and fishing boats for local needs
                 </p>
-                </div>
+            </div>
 
             <div class="footer-section contact-info">
                 <h3>Contact Us</h3>
                 <p class="phone">400-888-9999</p>
                 <p class="company-id">UAE Company Code: 91000XX</p>
                 <p class="address">Dubai Maritime City, 38-88, Gulf Innovation Center, 3rd Floor, Room 142<br>
-                </div>
+            </div>
 
             <div class="footer-section connect">
                 <h3>Follow Us</h3>
@@ -1497,15 +1549,12 @@
                     </a>
                 </div>
             </div>
-
-           
         </div>
 
         <div class="footer-bottom"></div>
-            <div class="container">
+        <div class="container">
             <div class="copyright">
-                    <p>&copy; 2025 TideMaster Marine Technology</p>
-                </div>
+                <p>&copy; 2025 TideMaster Marine Technology</p>
             </div>
         </div>
     </footer>

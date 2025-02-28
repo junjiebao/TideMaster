@@ -364,129 +364,40 @@ function loadUserSelections() {
     document.getElementById('total-price').textContent = `$${formatPrice(totalPrice)}`;
 }
 
-// 显示订单确认弹窗
-function showOrderConfirmation() {
-    // 收集所有选择的配置
-    const selections = {
-        // 标准配置（未取消的选项）
-        standardConfig: Array.from(document.querySelectorAll('.configurations .config-option input[type="checkbox"]:checked'))
-            .map(checkbox => checkbox.closest('label').querySelector('.option-title').textContent),
-        
-        // 发动机选择
-        engineSelection: document.querySelector('input[name="engine"]:checked')?.closest('label')
-            .querySelector('.option-title').textContent || 'Not selected',
-        
-        // 导航电子设备选择
-        navSelection: document.querySelector('input[name="nav-package"]:checked')?.closest('.col-package')
-            .querySelector('div').textContent || 'Not selected',
-        
-        // 可选配件
-        accessories: Array.from(document.querySelectorAll('.optional-accessories .config-option input[type="checkbox"]:checked'))
-            .map(checkbox => checkbox.closest('label').querySelector('.option-title').textContent)
-    };
-
-    // 创建确认弹窗内容
-    const confirmationContent = `
-        <div class="confirmation-dialog">
-            <div class="dialog-header">
-                <h2>Order Configuration Summary</h2>
-                <button class="close-btn" onclick="closeConfirmationDialog()">&times;</button>
-            </div>
-            
-            <div class="dialog-body">
-                <div class="summary-section">
-                    <h3>Standard Configuration</h3>
-                    <ul class="config-list">
-                        ${selections.standardConfig.map(item => `
-                            <li class="config-item">
-                                <i class="check-icon"></i>
-                                <span>${item}</span>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-
-                <div class="summary-section">
-                    <h3>Engine Selection</h3>
-                    <div class="selection-item">
-                        <i class="engine-icon"></i>
-                        <span>${selections.engineSelection}</span>
-                    </div>
-                </div>
-
-                <div class="summary-section">
-                    <h3>Navigation Electronics</h3>
-                    <div class="selection-item">
-                        <i class="nav-icon"></i>
-                        <span>${selections.navSelection}</span>
-                    </div>
-                </div>
-
-                ${selections.accessories.length > 0 ? `
-                    <div class="summary-section">
-                        <h3>Optional Accessories</h3>
-                        <ul class="accessories-list">
-                            ${selections.accessories.map(item => `
-                                <li class="accessory-item">
-                                    <i class="accessory-icon"></i>
-                                    <span>${item}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                ` : ''}
-            </div>
-
-            <div class="dialog-footer">
-                <button class="btn btn-secondary" onclick="closeConfirmationDialog()">Modify</button>
-                <button class="btn btn-primary" onclick="proceedToOrder()">Confirm Order</button>
-            </div>
-        </div>
-    `;
-
-    // 创建弹窗容器
-    const dialogContainer = document.createElement('div');
-    dialogContainer.className = 'confirmation-dialog-overlay';
-    dialogContainer.innerHTML = confirmationContent;
-    document.body.appendChild(dialogContainer);
-
-    // 添加动画
-    setTimeout(() => {
-        dialogContainer.classList.add('visible');
-        dialogContainer.querySelector('.confirmation-dialog').classList.add('visible');
-    }, 10);
-
-    // 保存选择到 localStorage
-    saveUserSelections();
+// 格式化价格函数
+function formatPrice(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// 关闭确认弹窗
-function closeConfirmationDialog() {
-    const dialog = document.querySelector('.confirmation-dialog-overlay');
-    if (dialog) {
-        dialog.remove();
-    }
-}
-
-// 确认并进入订单页面
-function proceedToOrder() {
-    window.location.href = '../submit-order.html';
-}
-
-// 初始化
-document.addEventListener('DOMContentLoaded', function() {
-    loadProducts();
-    initMobileMenu();
-    validateForm();
-    initLanguageSelector();
+// 更新价格显示
+function updatePriceDisplay() {
+    const basePrice = 120000;
+    const enginePrice = parseInt(document.getElementById('engine-price').textContent.replace(/[^0-9]/g, '')) || 0;
+    const navPrice = parseInt(document.getElementById('nav-price').textContent.replace(/[^0-9]/g, '')) || 0;
+    const accessoriesPrice = parseInt(document.getElementById('accessories-price').textContent.replace(/[^0-9]/g, '')) || 0;
     
-    if (slides.length > 1) {
-        setInterval(nextSlide, 5000);
-    }
-    initPriceDisplay();
+    const totalPrice = basePrice + enginePrice + navPrice + accessoriesPrice;
+    document.getElementById('total-price').textContent = `$${formatPrice(totalPrice)}`;
+}
 
-    // 在提交订单页面初始化时加载选择
-    if (document.querySelector('.submit-order-page')) {
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.includes('submit-order.html')) {
         loadUserSelections();
+        
+        // 连接计算按钮
+        const calculateButton = document.getElementById('calculate-button');
+        if (calculateButton) {
+            calculateButton.addEventListener('click', updatePriceDisplay);
+        }
+        
+        // 处理表单提交
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showOrderConfirmation();
+            });
+        }
     }
 });

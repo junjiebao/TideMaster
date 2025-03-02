@@ -555,6 +555,155 @@
     .empty-cell {
         background: rgba(255, 255, 255, 0.02);
     }
+
+    /* 产品页响应式样式 */
+    @media (max-width: 768px) {
+        /* 产品图库适配 */
+        .product-gallery {
+            flex-direction: column;
+        }
+
+        .main-image {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .thumbnails {
+            flex-direction: row;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .thumbnail {
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        /* 配置选项适配 */
+        .config-section {
+            padding: 2rem 1rem;
+        }
+
+        .config-options {
+            grid-template-columns: 1fr;
+        }
+
+        .config-option {
+            padding: 1rem;
+        }
+
+        /* 表单适配 */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+        }
+    }
+
+    /* 移动端导航栏优化 */
+    @media (max-width: 768px) {
+        /* 导航容器 */
+        .main-header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
+            gap: 0.8rem;
+        }
+
+        /* Logo 居中 */
+        .logo {
+            width: 80px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 导航列表 - 均匀分布 */
+        .nav-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 0;
+            padding: 0 1rem;
+        }
+
+        .nav-list li {
+            margin: 0;
+        }
+
+        .nav-list li a {
+            font-size: 0.8rem;
+            padding: 0.3rem 0;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* BUILD YOUR BOAT 按钮 - 独占一行 */
+        .header-actions {
+            width: 100%;
+            margin: 0;
+            text-align: center;
+        }
+
+        .build-btn {
+            width: 90%;
+            padding: 0.6rem;
+            font-size: 0.9rem;
+            margin: 0 auto;
+        }
+
+        /* 调整整体布局 */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+        }
+
+        /* 确保内容不被固定导航栏遮挡 */
+        body {
+            padding-top: 120px;
+        }
+
+        /* 在移动端隐藏 BECOME DEALER */
+        .nav-list li:last-child {
+            display: none;
+        }
+    }
+
+    /* 平板设备优化 */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .main-header .container {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .nav-list {
+            width: auto;
+            gap: 1.5rem;
+        }
+
+        .build-btn {
+            width: auto;
+            padding: 0.6rem 1.2rem;
+        }
+    }
     </style>
 </head>
 <body>
@@ -578,11 +727,9 @@
 
             <!-- 右侧操作区 -->
             <div class="header-actions">
-                <div class="dropdown">
-                    <a href="../products/TideMaster Cat.html" class="btn btn-primary build-btn">
-                        BUILD YOUR BOAT
-                    </a>
-                </div>
+                <a href="#config-section" class="btn btn-primary build-btn">
+                    BUILD YOUR BOAT
+                </a>
             </div>
         </div>
     </header>
@@ -601,7 +748,7 @@
             <!-- 产品图片展示 -->
             <section class="product-gallery">
                 <div class="main-image">
-                    <img src="../images/20250102145728.jpg" alt="38英尺双体船主图">
+                    <img src="../images\20250102145728.jpg" alt="38英尺双体船主图">
                 </div>
                 <div class="thumbnails">
                     <img src="../images\starboard.png" alt="38英尺双体船图片1">
@@ -999,7 +1146,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 250HP V8</span>
                                     <span class="option-description">Total power output: 500HP</span>
                                 </div>
-                                <span class="option-price">$60,000</span>
+                                <span class="option-price">$55,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1009,7 +1156,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 300HP V8</span>
                                     <span class="option-description">Total power output: 600HP</span>
                                 </div>
-                                <span class="option-price">$70,000</span>
+                                <span class="option-price">$60,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1019,7 +1166,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 350HP</span>
                                     <span class="option-description">Total power output: 700HP</span>
                                 </div>
-                                <span class="option-price">$78,000</span>
+                                <span class="option-price">$66,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1029,7 +1176,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 400HP</span>
                                     <span class="option-description">Total power output: 800HP</span>
                                 </div>
-                                <span class="option-price">$92,000</span>
+                                <span class="option-price">$74,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1039,7 +1186,7 @@
                                     <span class="option-title">MERCURY VERADO 400R</span>
                                     <span class="option-description">High performance racing engine</span>
                                 </div>
-                                <span class="option-price">$100,000</span>
+                                <span class="option-price">$80,000</span>
                             </label>
                         </div>
                     </div>
@@ -1057,42 +1204,42 @@
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="garmin-sport">
                             </label>
-                            <span class="package-price">$18,000</span>
+                            <span class="package-price">$11,000</span>
                         </div>
                         <div class="col-package">
                             <div>GARMIN PRO</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="garmin-pro">
                             </label>
-                            <span class="package-price">$55,000</span>
+                            <span class="package-price">$40,000</span>
                         </div>
                         <div class="col-package">
                             <div>RAYMARINE SPORT</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="raymarine-sport">
                             </label>
-                            <span class="package-price">$20,000</span>
+                            <span class="package-price">$12,500</span>
                         </div>
                         <div class="col-package">
                             <div>RAYMARINE PRO</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="raymarine-pro">
                             </label>
-                            <span class="package-price">$68,000</span>
+                            <span class="package-price">$41,000</span>
                         </div>
                         <div class="col-package">
                             <div>TIDEMASTER + Garmin Combo</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="tidemaster-sport">
                             </label>
-                            <span class="package-price">$50,000</span>
+                            <span class="package-price">$72,000</span>
                         </div>
                         <div class="col-package">
                             <div>TIDEMASTER + Raymarine Combo</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="tidemaster-pro">
                             </label>
-                            <span class="package-price">$58,000</span>
+                            <span class="package-price">$75,000</span>
                         </div>
                     </div>
 
@@ -1333,7 +1480,7 @@
                                     <div class="option-content">
                                         <span class="option-title">T-Top Solar Charging Kit</span>
                                     </div>
-                                    <span class="option-price">$900</span>
+                                    <span class="option-price">$1900</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1341,6 +1488,15 @@
                                     <input type="checkbox">
                                     <div class="option-content">
                                         <span class="option-title">Gyro Stabilizer</span>
+                                    </div>
+                                    <span class="option-price">$20,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Mercury Joystick Piloting</span>
                                     </div>
                                     <span class="option-price">$20,000</span>
                                 </label>
@@ -1367,7 +1523,7 @@
                                 <label>
                                     <input type="checkbox">
                                     <div class="option-content">
-                                        <span class="option-title">Fresh Water Shower</span>
+                                        <span class="option-title">Fresh Water Shower System</span>
                                     </div>
                                     <span class="option-price">$700</span>
                                 </label>
@@ -1381,7 +1537,7 @@
                                 <label>
                                     <input type="checkbox">
                                     <div class="option-content">
-                                        <span class="option-title">Aerogel Insulation Layer</span>
+                                        <span class="option-title">Aerogel Insulation Layer throughout the boat</span>
                                     </div>
                                     <span class="option-price">$2300</span>
                                 </label>
@@ -1408,7 +1564,7 @@
                                 <label>
                                     <input type="checkbox">
                                     <div class="option-content">
-                                        <span class="option-title">Upgraded Radar</span>
+                                        <span class="option-title">Upgraded 6ft Radar</span>
                                     </div>
                                     <span class="option-price">$8900</span>
                                 </label>

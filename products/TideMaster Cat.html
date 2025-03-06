@@ -272,8 +272,8 @@
         margin-bottom: 1rem;
     }
 
-    /* 配置选项 */
-    .configurations {
+    /* 标准配置部分 */
+    .config-section standard-config {
         padding: 4rem 0;
     }
 
@@ -283,7 +283,7 @@
         gap: 2rem;
     }
 
-    .config-option {
+    .config-group {
         background: rgba(255, 255, 255, 0.05);
         padding: 1.5rem;
         border-radius: 8px;
@@ -291,8 +291,23 @@
         transition: background-color 0.3s ease;
     }
 
-    .config-option:hover {
+    .config-group:hover {
         background: rgba(255, 255, 255, 0.1);
+    }
+
+    .config-group h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .config-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .config-list li {
+        margin-bottom: 0.75rem;
     }
 
     /* 价格计算器 */
@@ -704,6 +719,18 @@
             padding: 0.6rem 1.2rem;
         }
     }
+
+    /* 添加到现有的 CSS 中 */
+    .submit-order-section {
+        display: flex;
+        justify-content: flex-end; /* 右对齐 */
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+
+    .submit-order-section .btn {
+        min-width: 200px; /* 设置最小宽度确保按钮大小合适 */
+    }
     </style>
 </head>
 <body>
@@ -718,7 +745,13 @@
             <!-- 主导航 -->
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li><a href="../products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                    <li class="dropdown">
+                        <a href="#">TIDEMASTER</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                            <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
+                        </ul>
+                    </li>
                     <li><a href="../index.html#tech-features">WHY TIDEMASTER</a></li>
                     <li><a href="#contact">CONTACT</a></li>
                     <li><a href="#contact">BECOME DEALER</a></li>
@@ -727,14 +760,16 @@
 
             <!-- 右侧操作区 -->
             <div class="header-actions">
-                <a href="#config-section" class="btn btn-primary build-btn">
-                    BUILD YOUR BOAT
-                </a>
+                <div class="dropdown">
+                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
+                        <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
-
-
 
     <!-- 产品详情 -->
     <main class="product-detail">
@@ -824,315 +859,71 @@
                 </div>
             </section>
 
-            <!-- 标准配置 -->
-            <section class="configurations">
+            <!-- 标准配置部分 -->
+            <div class="config-section standard-config">
                 <h2>STANDARD CONFIGURATIONS</h2>
                 <div class="config-grid">
                     <!-- 船体结构 -->
                     <div class="config-group">
                         <h3>Hull & Structure</h3>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Aluminum Alloy High Strength Hull</span>
-                                    <span class="option-description">Corrosion resistant, high performance design</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Open Bow Design: </span>
-                                    <span class="option-description">Spacious front deck layout</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Hull Foam Filling: </span>
-                                    <span class="option-description">Enhanced buoyancy and insulation</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Non-slip EVA Deck: </span>
-                                    <span class="option-description">Full coverage anti-slip surface</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Bow Trailer U-Hook: </span>
-                                    <span class="option-description">Heavy-duty towing point</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Self-Draining Deck: </span>
-                                    <span class="option-description">Efficient water drainage system</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Trim Tab Mounting Brackets: </span>
-                                    <span class="option-description">2 sets for optimal performance</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Interior Protection Padding: </span>
-                                    <span class="option-description">Soft padding on interior gunwales</span>
-                                </div>
-                            </label>
-                        </div>
+                        <ul class="config-list">
+                            <li>Aluminum Alloy High Strength Hull: Corrosion resistant, Long-lasting, high performance design</li>
+                            <li>Open Bow Design:Spacious front deck layout</li>
+                            <li>Hull Foam Filling：Enhanced buoyancy and insulation</li>
+                            <li>Non-slip EVA Deck</li>
+                            <li>Bow Trailer U-Hook</li>
+                            <li>Self-Draining Deck</li>
+                            <li>Trim Tab Mounting Brackets</li>
+                            <li>Interior Soft Protection Padding:</li>
+                        </ul>
                     </div>
 
                     <!-- 钓鱼装备 -->
                     <div class="config-group">
                         <h3>Fishing Equipment</h3>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">17pcs Aluminum Alloy Welded Rod Holders: </span>
-                                    <span class="option-description">Strategic positioning on the T-top and Transom areas</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">12pcs 316 Stainless Steel Rod Holders: </span>
-                                    <span class="option-description">Premium quality, Corrosion resistant，Gunwale mounted</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">6pcs Built-in Fish Boxes: </span>
-                                    <span class="option-description">Thermal Insulated fish boxes with Pneumatic Springs Support</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Live Bait Compartment (280 L): </span>
-                                    <span class="option-description">Large Bait Tank with Integrated Handwash and Sink</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Built-in Ice Boxes: </span>
-                                    <span class="option-description">2 insulated Ice boxes for drinks and food storage</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Quick Drain Anchor Locker: </span>
-                                    <span class="option-description">With bow roller assembly</span>
-                                </div>
-                            </label>
-                        </div>
+                        <ul class="config-list">
+                            <li>17pcs Aluminum Alloy Welded Rod Holders</li>
+                            <li>12pcs 316 Stainless Steel Rod Holders</li>
+                            <li>6pcs Built-in Fish Boxes with Pneumatic Springs Support</li>
+                            <li>Live Bait Compartment (280 L)</li>
+                            <li>2 Built-in Ice Boxes</li>
+                            <li>Quick Drain Anchor Locker with bow roller assembly</li>
+                        </ul>
                     </div>
 
                     <!-- 舒适设施 -->
                     <div class="config-group">
                         <h3>Comfort & Convenience</h3>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Seating Package: </span>
-                                    <span class="option-description">Double front console seats, triple Pilot seats, triple rear seats and two fordable tramson seats</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">14pcs Drink Cup Holders: </span>
-                                    <span class="option-description">Conveniently placed throughout the boat</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Storage Solutions: </span>
-                                    <span class="option-description">2 under Pilot seat boxes, 4 Bow/Stern compartments, anchor storage, and more</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Toilet Facility: </span>
-                                    <span class="option-description">Large and Comfortable space, Complete with sink and exhaust window</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Windshield: </span>
-                                    <span class="option-description">Premium quality Windshield with sturdy frame</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Wash Down System: </span>
-                                    <span class="option-description">2 sets with Washdown kits, Diagonally situated</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Toilet Ventilation: </span>
-                                    <span class="option-description">Exhaust window for proper ventilation</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- 照明系统 -->
-                    <div class="config-group">
-                        <h3>Lighting & Electronics</h3>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">LED Lighting Package: </span>
-                                    <span class="option-description">Deck lights, T-top area lights</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Switch Control Panel: </span>
-                                    <span class="option-description">Centralized electrical control</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Dual Battery System: </span>
-                                    <span class="option-description">Two battery packs for reliable power supply</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Navigation Lights: </span>
-                                    <span class="option-description">Complete set including docking lights and Anchor light</span>
-                                </div>
-                            </label>
-                        </div>
+                        <ul class="config-list">
+                            <li>Double front console seats</li>
+                            <li>Triple Pilot seats</li>
+                            <li>Triple rear seats</li>
+                            <li>Two foldable transom seats</li>
+                            <li>14pcs Drink Cup Holders</li>
+                            <li>2 under Pilot seat storage boxes</li>
+                            <li>4 Bow/Stern storage compartments</li>
+                            <li>Toilet Facility with sink and exhaust window</li>
+                            <li>Premium quality Windshield with sturdy frame</li>
+                            <li>2 sets Wash Down System</li>
+                        </ul>
                     </div>
 
                     <!-- 安全设备 -->
                     <div class="config-group">
                         <h3>Safety & Utility</h3>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Twin Auto Bilge Pumps</span>
-                                    <span class="option-description">Efficient safety management</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">38MM Diameter Aluminum Alloy Handrails: </span>
-                                    <span class="option-description">Sturdy safety rails throughout bow area</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">11pcs Individual Hull Anti-collision Buoys: </span>
-                                    <span class="option-description">Enhanced docking protection and buoyancy support</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Premium Quality Swimming Ladder: </span>
-                                    <span class="option-description">Easy water access</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Gas Spring Supports: </span>
-                                    <span class="option-description">For all large and heavy compartment covers</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="config-option">
-                            <label>
-                                <input type="checkbox" checked>
-                                <div class="option-content">
-                                    <span class="option-title">Rope Cleats: </span>
-                                    <span class="option-description">7 heavy-duty cleats for secure mooring</span>
-                                </div>
-                            </label>
-                        </div>
+                        <ul class="config-list">
+                            <li>Twin Auto Bilge Pumps</li>
+                            <li>38MM Diameter Aluminum Alloy Handrails</li>
+                            <li>11pcs Individual Hull Anti-collision Buoys</li>
+                            <li>Premium Quality Swimming Ladder</li>
+                            <li>Gas Spring Supports for compartment covers</li>
+                            <li>7 heavy-duty rope cleats</li>
+                            <li>Non-slip EVA Deck Surface</li>
+                            <li>Self-Draining Deck</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
+            </div>
 
             <!-- 引擎选项 -->
             <section class="configurations">
@@ -1146,7 +937,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 250HP V8</span>
                                     <span class="option-description">Total power output: 500HP</span>
                                 </div>
-                                <span class="option-price">$55,000</span>
+                                <span class="option-price">AED 205,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1156,7 +947,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 300HP V8</span>
                                     <span class="option-description">Total power output: 600HP</span>
                                 </div>
-                                <span class="option-price">$60,000</span>
+                                <span class="option-price">AED 220,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1166,7 +957,7 @@
                                     <span class="option-title">Twin MERCURY VERADO 350HP</span>
                                     <span class="option-description">Total power output: 700HP</span>
                                 </div>
-                                <span class="option-price">$66,000</span>
+                                <span class="option-price">AED 242,000</span>
                             </label>
                         </div>
                         <div class="config-option">
@@ -1176,17 +967,17 @@
                                     <span class="option-title">Twin MERCURY VERADO 400HP</span>
                                     <span class="option-description">Total power output: 800HP</span>
                                 </div>
-                                <span class="option-price">$74,000</span>
+                                <span class="option-price">AED 260,000</span>
                             </label>
                         </div>
                         <div class="config-option">
                             <label>
                                 <input type="radio" name="engine" class="config-radio">
                                 <div class="option-content">
-                                    <span class="option-title">MERCURY VERADO 400R</span>
+                                    <span class="option-title">Twin MERCURY VERADO 400R</span>
                                     <span class="option-description">High performance racing engine</span>
                                 </div>
-                                <span class="option-price">$80,000</span>
+                                <span class="option-price">AED 280,000</span>
                             </label>
                         </div>
                     </div>
@@ -1204,42 +995,42 @@
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="garmin-sport">
                             </label>
-                            <span class="package-price">$11,000</span>
+                            <span class="package-price">AED 40,000</span>
                         </div>
                         <div class="col-package">
                             <div>GARMIN PRO</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="garmin-pro">
                             </label>
-                            <span class="package-price">$40,000</span>
+                            <span class="package-price">AED 147,000</span>
                         </div>
                         <div class="col-package">
                             <div>RAYMARINE SPORT</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="raymarine-sport">
                             </label>
-                            <span class="package-price">$12,500</span>
+                            <span class="package-price">AED 50,000</span>
                         </div>
                         <div class="col-package">
                             <div>RAYMARINE PRO</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="raymarine-pro">
                             </label>
-                            <span class="package-price">$41,000</span>
+                            <span class="package-price">AED 180,000</span>
                         </div>
                         <div class="col-package">
                             <div>TIDEMASTER + Garmin Combo</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="tidemaster-sport">
                             </label>
-                            <span class="package-price">$72,000</span>
+                            <span class="package-price">AED 200,000</span>
                         </div>
                         <div class="col-package">
                             <div>TIDEMASTER + Raymarine Combo</div>
                             <label class="radio-label">
                                 <input type="radio" name="nav-package" value="tidemaster-pro">
                             </label>
-                            <span class="package-price">$75,000</span>
+                            <span class="package-price">AED 220,000</span>
                         </div>
                     </div>
 
@@ -1377,7 +1168,7 @@
                                     <div class="option-content">
                                         <span class="option-title">T-Top froward LED light bar</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">AED 2,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1386,7 +1177,7 @@
                                     <div class="option-content">
                                         <span class="option-title">T-Top aft LED Light Bar</span>
                                     </div>
-                                    <span class="option-price">$300</span>
+                                    <span class="option-price">AED 1,200</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1395,7 +1186,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Transom Underwater Lights (X2)</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">AED 2,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1404,7 +1195,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Upgraded NightVision: FLIR CAMERA - M364C - STABILIZED 9HZ THERMAL CAMERA WITH JOYSTICK</span>
                                     </div>
-                                    <span class="option-price">$20,000</span>
+                                    <span class="option-price">AED 72,000</span>
                                 </label>
                             </div>
                         </div>
@@ -1418,7 +1209,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Twin Hull Side Door</span>
                                     </div>
-                                    <span class="option-price">$1700</span>
+                                    <span class="option-price">AED 6,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1427,7 +1218,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Teak Deck Material</span>
                                     </div>
-                                    <span class="option-price">$2700</span>
+                                    <span class="option-price">AED 10,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1436,7 +1227,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Swimming Ladder</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">AED 2,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1445,7 +1236,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Trim Tabs</span>
                                     </div>
-                                    <span class="option-price">$1700</span>
+                                    <span class="option-price">AED 6,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1454,7 +1245,7 @@
                                     <div class="option-content">
                                         <span class="option-title">38MM Stainless Steel Handrails</span>
                                     </div>
-                                    <span class="option-price">$2700</span>
+                                    <span class="option-price">AED 10,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1463,7 +1254,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Scuba Tank Storage Area</span>
                                     </div>
-                                    <span class="option-price">$1700</span>
+                                    <span class="option-price">AED 6,800</span>
                                 </label>
                             </div>
                         </div>
@@ -1480,7 +1271,7 @@
                                     <div class="option-content">
                                         <span class="option-title">T-Top Solar Charging Kit</span>
                                     </div>
-                                    <span class="option-price">$1900</span>
+                                    <span class="option-price">AED 7,600</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1489,7 +1280,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Gyro Stabilizer</span>
                                     </div>
-                                    <span class="option-price">$20,000</span>
+                                    <span class="option-price">AED 72,000</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1498,7 +1289,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Mercury Joystick Piloting</span>
                                     </div>
-                                    <span class="option-price">$20,000</span>
+                                    <span class="option-price">AED 72,000</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1507,7 +1298,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Extended Lithium Battery Pack</span>
                                     </div>
-                                    <span class="option-price">$5700</span>
+                                    <span class="option-price">AED 22,800</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1516,7 +1307,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Autonomous Navigation System</span>
                                     </div>
-                                    <span class="option-price">$30,000</span>
+                                    <span class="option-price">AED 120,000</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1525,7 +1316,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Fresh Water Shower System</span>
                                     </div>
-                                    <span class="option-price">$700</span>
+                                    <span class="option-price">AED 2,800</span>
                                 </label>
                             </div>
                         </div>
@@ -1539,7 +1330,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Aerogel Insulation Layer throughout the boat</span>
                                     </div>
-                                    <span class="option-price">$2300</span>
+                                    <span class="option-price">AED 9,200</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1548,7 +1339,7 @@
                                     <div class="option-content">
                                         <span class="option-title">10KG Stainless Steel Anchor with Chain and Rope</span>
                                     </div>
-                                    <span class="option-price">$800</span>
+                                    <span class="option-price">AED 3,200</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1557,7 +1348,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Sound System (8 Speakers)</span>
                                     </div>
-                                    <span class="option-price">$1200</span>
+                                    <span class="option-price">AED 4,400</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1566,7 +1357,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Upgraded 6ft Radar</span>
                                     </div>
-                                    <span class="option-price">$8900</span>
+                                    <span class="option-price">AED 32,000</span>
                                 </label>
                             </div>
                             <div class="config-option">
@@ -1575,7 +1366,7 @@
                                     <div class="option-content">
                                         <span class="option-title">Electric Windlass</span>
                                     </div>
-                                    <span class="option-price">$3200</span>
+                                    <span class="option-price">AED 12,800</span>
                                 </label>
                             </div>
                         </div>
@@ -1586,6 +1377,7 @@
             <!-- 提交订单 -->
             <section class="submit-order-section">
                 <form id="orderForm" action="../submit-order.html" method="GET">
+                    <input type="hidden" name="model" value="cat">
                     <input type="hidden" id="selectedEngine" name="engine">
                     <input type="hidden" id="selectedEnginePrice" name="enginePrice">
                     <input type="hidden" id="selectedNav" name="nav">
@@ -1599,7 +1391,7 @@
 
                 <script>
                 function collectFormData() {
-                    const basePrice = 120000;
+                    const basePrice = 420000;
                     let totalPrice = basePrice;
 
                     // 收集发动机信息

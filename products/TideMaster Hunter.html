@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TideMaster Hunter 28 - TideMaster Marine Technology</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    /* 基础深色主题和背景 */
+    :root {
+        --primary-color: #e31837;
+        --text-light: #ffffff;
+        --text-gray: rgba(255, 255, 255, 0.7);
+        --dark-bg: #000000;
+    }
+
+    body {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* 六边形背景图案 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #000000;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0l10.392 6v12L12 24 1.607 18V6z' fill-opacity='0.05' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+        background-size: 14px 14px;
+        opacity: 1;
+    }
+
+    /* 中间向两边的渐变遮罩 */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 40%,
+            rgba(0, 0, 0, 0.8) 80%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+
+    /* 统一导航栏样式 */
+    .main-header {
+        background-color: rgba(0, 0, 0, 0.9);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .main-header nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-header nav a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .main-header nav a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 页脚样式统一 */
+    footer {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 4rem 0 0;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .footer-section h4 {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-section li {
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-section a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+        color: var(--text-light);
+    }
+
+    /* 版权信息 */
+    .copyright {
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-gray);
+    }
+
+    /* 容器通用样式 */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* 产品标题区域 */
+    .product-hero {
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/hero-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 4rem;
+    }
+
+    .product-hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .product-hero p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* 产品详情页样式 */
+    .product-detail {
+        padding-top: 80px;
+        color: #ffffff;
+    }
+
+    .product-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .product-header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .product-tagline {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* 图片展示区域 */
+    .product-gallery {
+        margin: 4rem 0;
+    }
+
+    .main-image {
+        width: 100%;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .main-image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .thumbnails {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .thumbnails img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .thumbnails img:hover {
+        transform: scale(1.05);
+    }
+
+    /* 规格部分 */
+    .specifications {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4rem 0;
+        margin: 4rem 0;
+    }
+
+    .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .spec-item {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .spec-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .spec-item h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    /* 配置选项 */
+    .configurations {
+        padding: 4rem 0;
+    }
+
+    .config-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .config-option {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .config-option:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* 价格计算器 */
+    .price-calculator {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+    }
+
+    .price-display {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .price-display > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .total-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        border-bottom: none !important;
+    }
+
+    /* 相关产品 */
+    .related-products {
+        padding: 4rem 0;
+    }
+
+    .related-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+        margin: 3rem auto;
+        max-width: 1400px;
+    }
+
+    .related-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .related-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+    }
+
+    .related-card h3 {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    /* 按钮样式 */
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #e31837;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff1f41;
+    }
+
+    .btn-secondary {
+        border: 2px solid #e31837;
+        color: #e31837;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e31837;
+        color: white;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .product-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .product-tagline {
+            font-size: 1.2rem;
+        }
+        
+        .spec-grid,
+        .config-grid,
+        .related-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 下拉菜单样式 */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu,
+    .build-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 200px;
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-list li {
+        padding: 0.5rem 0;
+    }
+
+    .menu-list a {
+        display: block;
+        padding: 0.5rem 1.5rem;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .menu-list a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 悬停显示下拉菜单 */
+    .dropdown:hover .dropdown-menu,
+    .dropdown:hover .build-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* BUILD YOUR BOAT 按钮样式 */
+    .header-actions .btn {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .header-actions .btn:hover {
+        background-color: #ff1f41;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .dropdown-menu,
+        .build-menu {
+            position: static;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            display: none;
+            background: transparent;
+            border: none;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:hover .build-menu {
+            display: block;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .related-grid {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+        }
+    }
+
+    /* 导航和电子设备表格样式 */
+    .nav-electronics-table {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .table-header {
+        display: grid;
+        grid-template-columns: 180px repeat(6, 1fr);
+        background: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-row {
+        display: grid;
+        grid-template-columns: 180px repeat(6, 1fr);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-row:last-child {
+        border-bottom: none;
+    }
+
+    .row-header {
+        padding: 1rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.02);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .col-package {
+        padding: 1rem;
+        text-align: center;
+        font-weight: 600;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .package-content {
+        padding: 1rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .package-content:last-child,
+    .col-package:last-child {
+        border-right: none;
+    }
+
+    .empty-cell {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* 产品页响应式样式 */
+    @media (max-width: 768px) {
+        /* 产品图库适配 */
+        .product-gallery {
+            flex-direction: column;
+        }
+
+        .main-image {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .thumbnails {
+            flex-direction: row;
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .thumbnail {
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        /* 配置选项适配 */
+        .config-section {
+            padding: 2rem 1rem;
+        }
+
+        .config-options {
+            grid-template-columns: 1fr;
+        }
+
+        .config-option {
+            padding: 1rem;
+        }
+
+        /* 表单适配 */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+        }
+    }
+
+    /* 移动端导航栏优化 */
+    @media (max-width: 768px) {
+        /* 导航容器 */
+        .main-header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
+            gap: 0.8rem;
+        }
+
+        /* Logo 居中 */
+        .logo {
+            width: 80px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* 导航列表 - 均匀分布 */
+        .nav-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 0;
+            padding: 0 1rem;
+        }
+
+        .nav-list li {
+            margin: 0;
+        }
+
+        .nav-list li a {
+            font-size: 0.8rem;
+            padding: 0.3rem 0;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* BUILD YOUR BOAT 按钮 - 独占一行 */
+        .header-actions {
+            width: 100%;
+            margin: 0;
+            text-align: center;
+        }
+
+        .build-btn {
+            width: 90%;
+            padding: 0.6rem;
+            font-size: 0.9rem;
+            margin: 0 auto;
+        }
+
+        /* 调整整体布局 */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+        }
+
+        /* 确保内容不被固定导航栏遮挡 */
+        body {
+            padding-top: 120px;
+        }
+
+        /* 在移动端隐藏 BECOME DEALER */
+        .nav-list li:last-child {
+            display: none;
+        }
+    }
+
+    /* 平板设备优化 */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .main-header .container {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .nav-list {
+            width: auto;
+            gap: 1.5rem;
+        }
+
+        .build-btn {
+            width: auto;
+            padding: 0.6rem 1.2rem;
+        }
+    }
+
+    /* 标准配置样式 */
+    .standard-config {
+        padding: 4rem 2rem;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .config-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .config-group {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2rem;
+        border-radius: 8px;
+    }
+
+    .config-group h3 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+
+    .config-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .config-list li {
+        color: var(--text-light);
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+    }
+
+    .config-list li:last-child {
+        border-bottom: none;
+    }
+
+    /* 移动端响应式 */
+    @media (max-width: 768px) {
+        .config-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .config-group {
+            padding: 1.5rem;
+        }
+
+        .standard-config {
+            padding: 2rem 1rem;
+        }
+    }
+
+    /* 添加到现有的 CSS 中 */
+    .submit-order-section {
+        display: flex;
+        justify-content: flex-end; /* 右对齐 */
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+
+    .submit-order-section .btn {
+        min-width: 200px; /* 设置最小宽度确保按钮大小合适 */
+    }
+    </style>
+</head>
+<body>
+    <!-- 更新导航栏部分 -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <a href="../index.html" class="logo">
+                <img src="../images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+            </a>
+
+            <!-- 主导航 -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="dropdown">
+                        <a href="#">TIDEMASTER</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                            <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="#contact">BECOME DEALER</a></li>
+                </ul>
+            </nav>
+
+            <!-- 右侧操作区 -->
+            <div class="header-actions">
+                <div class="dropdown">
+                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
+                        <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 产品详情 -->
+    <main class="product-detail">
+        <div class="container">
+            <!-- 产品标题 -->
+            <div class="product-header">
+                <h1>TIDEMASTER Hunter 28</h1>
+                <p class="product-tagline">Stable, Reliable, Energy-Efficient</p>
+            </div>
+
+            <!-- 产品图片展示 -->
+            <section class="product-gallery">
+                <div class="main-image">
+                    <img src="../images\C280\black sb side.JPG" alt="28英尺双体船主图">
+                </div>
+                <div class="thumbnails">
+                    <img src="../images\C280\white sb.JPG" alt="28英尺双体船图片1">
+                    <img src="../images\C280\top size.JPG" alt="28英尺双体船图片2">
+                    <img src="../images\C280\black top.JPG" alt="28英尺双体船图片3">
+                </div>
+            </section>
+
+            <!-- 技术规格 -->
+            <section class="specifications">
+                <h2>TECHNICAL SPECIFICATIONS</h2>
+                <div class="spec-grid">
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Length Overall</h3>
+                            <p>8.7 m</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Beam</h3>
+                            <p>2.5 m</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Draft</h3>
+                            <p>0.4 m</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Material</h3>
+                            <p>Aluminum Alloy 5083-H116</p>
+                            <p>Aluminum Alloy 5052-H32</p>
+                        </div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Maximum Power</h3>
+                            <p>Twin 225 HP</p>
+                            <p>（450 HP Total）</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Bottom Plate</h3>
+                            <p>6 mm</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Side Plate</h3>
+                            <p>4 mm</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Fuel Capacity</h3>
+                            <p>400 L</p>
+                        </div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Transom Plate</h3>
+                            <p>7-9 mm</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Fresh Water</h3>
+                            <p>100 L</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Dry Weight</h3>
+                            <p>1,750 kg</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Maximum Capacity</h3>
+                            <p>8 persons</p>
+                        </div>
+                    </div>
+                   
+                </div>
+            </section>
+
+            <!-- 标准配置 -->
+            <div class="config-section standard-config">
+                <h2>STANDARD CONFIGURATIONS</h2>
+                <div class="config-grid">
+                    <!-- 电气系统 -->
+                    <div class="config-group">
+                        <h3>Electrical System</h3>
+                        <ul class="config-list">
+                            <li>12V DC system</li>
+                            <li>120V/60 Hz AC outputs from inverter/charger</li>
+                            <li>Two (2) deep cycle (12V/200AH) batteries; one for each engine</li>
+                            <li>One (1) JMT® 40A,12V DC charging & 3000w, 120V AC output</li>
+                            <li>Backlighted AC/DC distribution panels with marine grade wirings</li>
+                            <li>Battery selection switches on a management panel</li>
+                            <li>Electrical bonding system</li>
+                            <li>VICTRON® VDI galvanic isolator, one (1) unit</li>
+                            <li>VICTRON® 100amp isolation transformer, one (1) unit</li>
+                            <li>AQUA SIGNAL® LED navigation lights</li>
+                            <li>Search light: One (1) with remote control</li>
+                            <li>LED (12 V DC) lights thru-out vessel</li>
+                            <li>Shore Power: One (1) 50-amp connection</li>
+                        </ul>
+                    </div>
+
+                    <!-- 机械系统和设备 -->
+                    <div class="config-group">
+                        <h3>Mechanical System & Equipment</h3>
+                        <ul class="config-list">
+                            <li>Exhaust vent:
+                                <ul>
+                                    <li>Bilge ventilation with one (1) 12V DC blower</li>
+                                    <li>Head ventilation with one (1) 12V DC blower</li>
+                                </ul>
+                            </li>
+                            <li>Fire extinguisher system for Mechanical room</li>
+                            <li>Pumps:
+                                <ul>
+                                    <li>Fresh water pump: One (1) SEAFLO® 12V DC pump</li>
+                                    <li>Waste discharge pump: One (1) SEAFLO® 12V DC pump</li>
+                                    <li>Bilge pump: One (1) SEAFLO® 2000gph, 12V DC pumps w/ float switch</li>
+                                    <li>Emergency pump: One (1) manual bilge pump</li>
+                                </ul>
+                            </li>
+                            <li>Marine head: One (1) TACMA® electric toilet</li>
+                            <li>Steering system: One (1) UFLRX® steering system</li>
+                            <li>Tanks (with level sensors & gauges):
+                                <ul>
+                                    <li>Aluminum fuel tank: 103 gallons Total</li>
+                                    <li>Aluminum holding tank: 26 gallons total with Y-valve for deck pump-out or overboard discharges</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 可选升级 -->
+                    <div class="config-group">
+                        <h3>Optional Upgrades</h3>
+                        <div class="config-options">
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox" name="optional-upgrade">
+                                    <div class="option-content">
+                                        <span class="option-title">Anchor windlass: LEWMAR® electric windlass</span>
+                                    </div>
+                                    <span class="option-price">AED 8,500</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox" name="optional-upgrade">
+                                    <div class="option-content">
+                                        <span class="option-title">Marine stereo system</span>
+                                    </div>
+                                    <span class="option-price">AED 4,500</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 引擎选项 -->
+            <section class="configurations">
+                <h2>ENGINE OPTIONS</h2>
+                <div class="config-grid">
+                    <div class="config-group">
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio" value="verado-250">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY 115HP</span>
+                                    <span class="option-description">Total power output: 230HP</span>
+                                </div>
+                                <span class="option-price">AED 85,000</span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio" value="verado-300">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 150HP</span>
+                                    <span class="option-description">Total power output: 300HP</span>
+                                </div>
+                                <span class="option-price">AED 90,000</span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 225HP V6</span>
+                                    <span class="option-description">Total power output: 450HP</span>
+                                </div>
+                                <span class="option-price">AED 140,000</span>
+                            </label>
+                        </div>
+                       
+                    </div>
+                </div>
+            </section>
+
+            <!-- 导航和电子设备选项 -->
+            <section class="configurations">
+                <h2>NAVIGATION & ELECTRONICS OPTIONS</h2>
+                <div class="nav-electronics-table">
+                    <div class="table-header">
+                        <div class="row-header"></div>
+                        <div class="col-package">
+                            <div>GARMIN SPORT</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="garmin-sport">
+                            </label>
+                            <span class="package-price">AED 40,000</span>
+                        </div>
+                        <div class="col-package">
+                            <div>RAYMARINE SPORT</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="raymarine-sport">
+                            </label>
+                            <span class="package-price">AED 46,000</span>
+                        </div>
+                    </div>
+
+                    <!-- MFD 行 -->
+                    <div class="table-row">
+                        <div class="row-header">MFD</div>
+                        <div class="package-content">Twin Garmin GPSMAP® 8412xsv MFDs</div>
+                        <div class="package-content">Twin Raymarine Axiom Pro 12 MFDs</div>
+                    </div>
+
+                    <!-- Radar 行 -->
+                    <div class="table-row">
+                        <div class="row-header">Radar</div>
+                        <div class="package-content">GARMIN GMR™ 18 xHD3</div>
+                        <div class="package-content">Raymarine Quantum 2 CHIRP Doppler Radar</div>
+                    </div>
+
+                    <!-- MARINE VHF RADIOS 行 -->
+                    <div class="table-row">
+                        <div class="row-header">MARINE VHF RADIOS</div>
+                        <div class="package-content">VHF 115 Marine Radio</div>
+                        <div class="package-content">Ray53 VHF Radio</div>
+                    </div>
+
+
+                    <!-- Transducer 行 -->
+                    <div class="table-row">
+                        <div class="row-header">Transducer</div>
+                        <div class="package-content">Garmin GT23M-TM</div>
+                        <div class="package-content">Raymarine RV-100 RealVision™ 3D Transom Mount Transducer</div>
+                    </div>
+                </div>
+            </section>
+
+        
+            <!-- 提交订单 -->
+            <section class="submit-order-section">
+                <form id="orderForm" action="../submit-order.html" method="GET">
+                    <input type="hidden" name="model" value="hunter">
+                    <input type="hidden" id="selectedEngine" name="engine">
+                    <input type="hidden" id="selectedEnginePrice" name="enginePrice">
+                    <input type="hidden" id="selectedNav" name="nav">
+                    <input type="hidden" id="selectedNavPrice" name="navPrice">
+                    <input type="hidden" id="selectedAccessories" name="accessories">
+                    <input type="hidden" id="selectedAccessoriesPrice" name="accessoriesPrice">
+                    <input type="hidden" id="finalTotalPrice" name="totalPrice">
+                    
+                    <button type="button" class="btn btn-primary" onclick="collectFormData()">Submit Order</button>
+                </form>
+
+                <script>
+                function collectFormData() {
+                    const basePrice = 120000; // 基础价格 120,000 AED
+                    let totalPrice = basePrice;
+
+                    // 收集发动机信息
+                    const selectedEngine = document.querySelector('input[name="engine"]:checked');
+                    if (selectedEngine) {
+                        const engineOption = selectedEngine.closest('.config-option');
+                        const engineTitle = engineOption.querySelector('.option-title').textContent;
+                        const enginePriceText = engineOption.querySelector('.option-price').textContent;
+                        const enginePrice = parseInt(enginePriceText.replace(/[^0-9]/g, ''));
+                        
+                        document.getElementById('selectedEngine').value = engineTitle;
+                        document.getElementById('selectedEnginePrice').value = enginePrice;
+                        totalPrice += enginePrice;
+                    }
+
+                    // 收集导航系统信息
+                    const selectedNav = document.querySelector('input[name="nav-package"]:checked');
+                    if (selectedNav) {
+                        const navPackage = selectedNav.closest('.col-package');
+                        const navTitle = navPackage.querySelector('div').textContent;
+                        const navPriceText = navPackage.querySelector('.package-price').textContent;
+                        const navPrice = parseInt(navPriceText.replace(/[^0-9]/g, ''));
+                        
+                        document.getElementById('selectedNav').value = navTitle;
+                        document.getElementById('selectedNavPrice').value = navPrice;
+                        totalPrice += navPrice;
+                    }
+
+                    // 收集配件信息
+                    const selectedAccessories = Array.from(document.querySelectorAll('.config-option input[type="checkbox"]:checked'))
+                        .map(checkbox => {
+                            const option = checkbox.closest('.config-option');
+                            const title = option.querySelector('.option-title').textContent;
+                            const priceText = option.querySelector('.option-price').textContent;
+                            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+                            return { title, price };
+                        });
+                    
+                    const accessoriesTotal = selectedAccessories.reduce((sum, item) => sum + item.price, 0);
+                    document.getElementById('selectedAccessories').value = JSON.stringify(selectedAccessories);
+                    document.getElementById('selectedAccessoriesPrice').value = accessoriesTotal;
+                    totalPrice += accessoriesTotal;
+
+                    // 设置总价
+                    document.getElementById('finalTotalPrice').value = totalPrice;
+
+                    // 验证必选项
+                    if (!selectedEngine) {
+                        alert('Please select an engine option');
+                        return;
+                    }
+                    if (!selectedNav) {
+                        alert('Please select a navigation package');
+                        return;
+                    }
+
+                    // 提交表单
+                    document.getElementById('orderForm').submit();
+                }
+                </script>
+            </section>
+
+            <!-- 相关产品 -->
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="main-footer">
+        <div id="contact" class="footer-content">
+            <div class="footer-section company-info">
+                <div class="footer-logo">
+                    <img src="../images/Logo.jpg" alt="TideMaster Marine Technology" class="logo-img" style="max-width: 120px;">
+                    <span class="logo-text">TideMaster Marine Technology</span>
+                </div>
+                <p class="company-desc">
+                    UAE Dubai TideMaster Marine Technology specializes in developing high-quality aluminum yachts and fishing boats for local needs
+                </p>
+            </div>
+
+            <div class="footer-section contact-info">
+                <h3>Contact Us</h3>
+                <p class="phone">400-888-9999</p>
+                <p class="company-id">UAE Company Code: 91000XX</p>
+                <p class="address">Dubai Maritime City, 38-88, Gulf Innovation Center, 3rd Floor, Room 142<br>
+            </div>
+
+            <div class="footer-section connect">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="WeChat">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Weibo">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="social-link" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Snapchat">
+                        <i class="fab fa-snapchat"></i>
+                    </a>
+                    <a href="#" class="social-link" title="X">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom"></div>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 TideMaster Marine Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

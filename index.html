@@ -425,6 +425,62 @@
             padding: 3rem 0;
         }
     }
+
+    /* 下拉菜单基础样式 */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(0, 0, 0, 0.95);
+        min-width: 200px;
+        padding: 0.5rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+    }
+
+    /* BUILD YOUR BOAT 按钮的下拉菜单位置调整 */
+    .header-actions .dropdown-menu {
+        right: 0;
+        left: auto;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .header-actions .dropdown-menu a {
+        color: #FFFFFF;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .header-actions .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e31837;
+    }
+
+    /* 显示下拉菜单 */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .dropdown-menu {
+            position: static;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .header-actions .dropdown-menu {
+            text-align: center;
+        }
+    }
     </style>
 </head>
 <body class="dark-theme">
@@ -439,7 +495,13 @@
             <!-- 主导航 -->
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                    <li class="dropdown">
+                        <a href="#">TIDEMASTER</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                            <li><a href="products/TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#tech-features">WHY TIDEMASTER</a></li>
                     <li><a href="#contact">CONTACT</a></li>
                     <li><a href="#contact">BECOME DEALER</a></li>
@@ -448,9 +510,13 @@
 
             <!-- 右侧操作区 -->
             <div class="header-actions">
-                <a href="products/TideMaster Cat.html" class="btn btn-primary build-btn">
-                    BUILD YOUR BOAT
-                </a>
+                <div class="dropdown">
+                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
+                        <li><a href="products/TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -473,7 +539,7 @@
     <!-- 修改船型展示区域 -->
     <section id="boat-range" class="section">
         <div class="container">
-            <h2 class="section-title">Our Boat</h2>
+            <h2 class="section-title">Our Performance Boats</h2>
             <div class="boat-grid">
                 <!-- TIDEMASTER CAT -->
                 <div class="boat-card">
@@ -487,6 +553,19 @@
                         </div>
                     </a>
                 </div>
+
+                <!-- TIDEMASTER HUNTER -->
+                <div class="boat-card">
+                    <a href="products/TideMaster Hunter.html">
+                        <div class="boat-image">
+                            <img src="images\C280\white sb.JPG" alt="TideMaster Hunter 28">
+                        </div>
+                        <div class="boat-info">
+                            <h2>TideMaster Hunter 28</h2>
+                            <p>Agile, Versatile, High-Performance Aluminum Fishing Boat</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -496,6 +575,10 @@
     .boat-grid {
         max-width: 1200px;
         margin: 3rem auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 桌面端两列 */
+        gap: 2rem;
+        padding: 0 1rem;
     }
 
     .boat-card {
@@ -537,10 +620,11 @@
         font-size: 1.1rem;
     }
 
-    /* 移除多列布局 */
-    @media (max-width: 992px) {
+    /* 移动端适配 */
+    @media (max-width: 768px) {
         .boat-grid {
-            padding: 0 1rem;
+            grid-template-columns: 1fr; /* 移动端单列 */
+            gap: 1.5rem;
         }
     }
     </style>

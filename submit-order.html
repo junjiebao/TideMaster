@@ -367,26 +367,62 @@
     <!-- 订单摘要 -->
     <div class="order-summary">
         <h2 class="section-title">Order Summary</h2>
-        <div class="order-item">
-            <div class="item-title">Base Price</div>
-            <div class="item-price">$120,000</div>
+        
+        <!-- TideMaster Cat 38 订单信息 -->
+        <div id="catOrderSummary" style="display: none;">
+            <div class="order-item">
+                <div class="item-title">Base Price for TIDEMASTER CAT 38</div>
+                <p> (Incl. all standard features listed on the product page)</p>
+                <div class="item-price">AED 420,0000</div>
+            </div>
+            <div id="engineSection" class="order-item">
+                <div class="item-title">Engine Configuration</div>
+                <div id="engineDetails" class="item-details"></div>
+                <div id="enginePrice" class="item-price"></div>
+            </div>
+            <div id="navSection" class="order-item">
+                <div class="item-title">Navigation Package</div>
+                <div id="navDetails" class="item-details"></div>
+                <div id="navPrice" class="item-price"></div>
+            </div>
+            <div id="accessoriesSection" class="order-item">
+                <div class="item-title">Optional Accessories</div>
+                <div id="accessoriesDetails" class="item-details"></div>
+                <div id="accessoriesPrice" class="item-price"></div>
+            </div>
+            <div class="order-item total">
+                <div class="item-title">Total Price</div>
+                <div id="totalPrice" class="item-price"></div>
+            </div>
         </div>
-        <div id="engineSection" class="order-item">
-            <div class="item-title">Engine Configuration</div>
-            <div id="engineDetails" class="item-details"></div>
-            <div id="enginePrice" class="item-price"></div>
+
+        <!-- TideMaster Hunter 28 订单信息 -->
+        <div id="hunterOrderSummary" style="display: none;">
+            <div class="order-item">
+                <div class="item-title">Base Price for TIDEMASTER HUNTER 28</div>
+                <p> (Incl. all standard features listed on the product page)</p>
+                <div class="item-price">AED 135,000</div>
+            </div>
+            <div id="hunterEngineSection" class="order-item">
+                <div class="item-title">Engine Configuration</div>
+                <div id="hunterEngineDetails" class="item-details"></div>
+                <div id="hunterEnginePrice" class="item-price"></div>
+            </div>
+            <div id="hunterNavSection" class="order-item">
+                <div class="item-title">Navigation Package</div>
+                <div id="hunterNavDetails" class="item-details"></div>
+                <div id="hunterNavPrice" class="item-price"></div>
+            </div>
+            <div id="hunterAccessoriesSection" class="order-item">
+                <div class="item-title">Optional Accessories</div>
+                <div id="hunterAccessoriesDetails" class="item-details"></div>
+                <div id="hunterAccessoriesPrice" class="item-price"></div>
+            </div>
+            <div class="order-item total">
+                <div class="item-title">Total Price</div>
+                <div id="hunterTotalPrice" class="item-price"></div>
+            </div>
         </div>
-        <div id="navSection" class="order-item">
-            <div class="item-title">Navigation System</div>
-            <div id="navDetails" class="item-details"></div>
-            <div id="navPrice" class="item-price"></div>
-        </div>
-        <div id="accessoriesSection" class="order-item">
-            <div class="item-title">Additional Accessories</div>
-            <div id="accessoriesList" class="item-details"></div>
-            <div id="accessoriesPrice" class="item-price"></div>
-        </div>
-        <div class="total-price" id="totalPrice"></div>
     </div>
 
     <!-- 联系方式部分 -->
@@ -395,11 +431,11 @@
         <div class="company-contact-info">
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
-                <p>Dubai Maritime City, 38-88, Gulf Innovation Center, 3rd Floor, Room 142</p>
+                <p>Share with us your choice and options via WhatsApp (Screenshot of the order summary is required)</p>
             </div>
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <p>+971 561018837</p>
+                    <p>+971 561018837</p>
 </div>
             <div class="whatsapp-section">
                 <img src="images/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
@@ -443,72 +479,87 @@
             </div>
         </div>
         <div class="copyright">
-                <p>&copy; 2025 TideMaster Marine Technology</p>
+                <p>&copy; 2024-2025 TideMaster Marine Technology</p>
     </div>
 </footer>
 
 <script>
-    // 获取URL参数的函数
-    function getUrlParams() {
-        const params = new URLSearchParams(window.location.search);
-        return {
-            engine: params.get('engine'),
-            enginePrice: params.get('enginePrice'),
-            nav: params.get('nav'),
-            navPrice: params.get('navPrice'),
-            accessories: JSON.parse(params.get('accessories') || '[]'),
-            accessoriesPrice: params.get('accessoriesPrice'),
-            totalPrice: params.get('totalPrice')
-        };
+window.addEventListener('load', function() {
+    // 获取URL参数
+    const params = new URLSearchParams(window.location.search);
+    const boatModel = params.get('model'); // 新增参数，用于区分船型
+
+    // 根据船型显示对应的订单摘要
+    if (boatModel === 'cat') {
+        document.getElementById('catOrderSummary').style.display = 'block';
+        displayCatOrderSummary(params);
+    } else if (boatModel === 'hunter') {
+        document.getElementById('hunterOrderSummary').style.display = 'block';
+        displayHunterOrderSummary(params);
+    }
+});
+
+// TideMaster Cat 38 订单处理函数
+function displayCatOrderSummary(params) {
+    const basePrice = 420000;
+    let totalPrice = basePrice;
+
+    // 显示发动机配置
+    if (params.get('engine') && params.get('enginePrice')) {
+        document.getElementById('engineDetails').textContent = params.get('engine');
+        document.getElementById('enginePrice').textContent = `AED ${parseInt(params.get('enginePrice')).toLocaleString()}`;
+        totalPrice += parseInt(params.get('enginePrice'));
     }
 
-    // 显示订单详情
-    function displayOrderSummary() {
-        const params = getUrlParams();
-        const basePrice = 120000;
-
-        // 显示发动机信息
-        if (params.engine && params.enginePrice) {
-            document.getElementById('engineDetails').textContent = params.engine;
-            document.getElementById('enginePrice').textContent = `$${parseInt(params.enginePrice).toLocaleString()}`;
-        } else {
-            document.getElementById('engineSection').style.display = 'none';
-        }
-
-        // 显示导航系统信息
-        if (params.nav && params.navPrice) {
-            document.getElementById('navDetails').textContent = params.nav;
-            document.getElementById('navPrice').textContent = `$${parseInt(params.navPrice).toLocaleString()}`;
-        } else {
-            document.getElementById('navSection').style.display = 'none';
-        }
-
-        // 显示配件信息
-        if (params.accessories && params.accessories.length > 0) {
-            const accessoriesList = document.getElementById('accessoriesList');
-            params.accessories.forEach(item => {
-                const div = document.createElement('div');
-                div.textContent = `${item.title}`;
-                accessoriesList.appendChild(div);
-            });
-            document.getElementById('accessoriesPrice').textContent = 
-                `$${parseInt(params.accessoriesPrice).toLocaleString()}`;
-        } else {
-            document.getElementById('accessoriesSection').style.display = 'none';
-        }
-
-        // 计算并显示总价
-        let totalPrice = basePrice;
-        totalPrice += parseInt(params.enginePrice) || 0;
-        totalPrice += parseInt(params.navPrice) || 0;
-        totalPrice += parseInt(params.accessoriesPrice) || 0;
-
-        document.getElementById('totalPrice').textContent = 
-            `Total Price: $${totalPrice.toLocaleString()}`;
+    // 显示导航系统
+    if (params.get('nav') && params.get('navPrice')) {
+        document.getElementById('navDetails').textContent = params.get('nav');
+        document.getElementById('navPrice').textContent = `AED ${parseInt(params.get('navPrice')).toLocaleString()}`;
+        totalPrice += parseInt(params.get('navPrice'));
     }
 
-    // 页面加载时显示订单信息
-    window.addEventListener('load', displayOrderSummary);
+    // 显示配件
+    if (params.get('accessories') && params.get('accessoriesPrice')) {
+        const accessories = JSON.parse(params.get('accessories'));
+        document.getElementById('accessoriesDetails').innerHTML = accessories.map(acc => acc.title).join('<br>');
+        document.getElementById('accessoriesPrice').textContent = `AED ${parseInt(params.get('accessoriesPrice')).toLocaleString()}`;
+        totalPrice += parseInt(params.get('accessoriesPrice'));
+    }
+
+    // 显示总价
+    document.getElementById('totalPrice').textContent = `AED ${totalPrice.toLocaleString()}`;
+}
+
+// TideMaster Hunter 28 订单处理函数
+function displayHunterOrderSummary(params) {
+    const basePrice = 140000;
+    let totalPrice = basePrice;
+
+    // 显示发动机配置
+    if (params.get('engine') && params.get('enginePrice')) {
+        document.getElementById('hunterEngineDetails').textContent = params.get('engine');
+        document.getElementById('hunterEnginePrice').textContent = `AED ${parseInt(params.get('enginePrice')).toLocaleString()}`;
+        totalPrice += parseInt(params.get('enginePrice'));
+    }
+
+    // 显示导航系统
+    if (params.get('nav') && params.get('navPrice')) {
+        document.getElementById('hunterNavDetails').textContent = params.get('nav');
+        document.getElementById('hunterNavPrice').textContent = `AED ${parseInt(params.get('navPrice')).toLocaleString()}`;
+        totalPrice += parseInt(params.get('navPrice'));
+    }
+
+    // 显示配件
+    if (params.get('accessories') && params.get('accessoriesPrice')) {
+        const accessories = JSON.parse(params.get('accessories'));
+        document.getElementById('hunterAccessoriesDetails').innerHTML = accessories.map(acc => acc.title).join('<br>');
+        document.getElementById('hunterAccessoriesPrice').textContent = `AED ${parseInt(params.get('accessoriesPrice')).toLocaleString()}`;
+        totalPrice += parseInt(params.get('accessoriesPrice'));
+    }
+
+    // 显示总价
+    document.getElementById('hunterTotalPrice').textContent = `AED ${totalPrice.toLocaleString()}`;
+}
 </script>
 </body>
 </html>

@@ -636,80 +636,49 @@
 
     /* 移动端导航栏优化 */
     @media (max-width: 768px) {
-        /* 导航容器 */
-        .main-header .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0.5rem;
-            gap: 0.8rem;
-        }
-
         /* Logo 居中 */
         .logo {
-            width: 80px;
             margin: 0 auto;
-            text-align: center;
+            padding: 0.5rem 0;
         }
 
         .logo-img {
-            width: 100%;
-            height: auto;
+            height: 40px;
         }
 
-        /* 导航列表 - 均匀分布 */
+        /* 导航菜单居中 */
+        .main-nav {
+            width: 100%;
+            margin: 0;
+        }
+
         .nav-list {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin: 0;
-            padding: 0 1rem;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
         }
 
-        .nav-list li {
-            margin: 0;
+        /* 移除下拉菜单功能 */
+        .dropdown-menu {
+            display: none !important;
         }
 
-        .nav-list li a {
-            font-size: 0.8rem;
-            padding: 0.3rem 0;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        /* BUILD YOUR BOAT 按钮 - 独占一行 */
-        .header-actions {
-            width: 100%;
-            margin: 0;
-            text-align: center;
-        }
-
-        .build-btn {
-            width: 90%;
-            padding: 0.6rem;
+        /* 调整链接样式 */
+        .nav-list a {
             font-size: 0.9rem;
-            margin: 0 auto;
+            padding: 0.5rem;
+            white-space: nowrap;
         }
 
-        /* 调整整体布局 */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-        }
-
-        /* 确保内容不被固定导航栏遮挡 */
-        body {
-            padding-top: 120px;
-        }
-
-        /* 在移动端隐藏 BECOME DEALER */
-        .nav-list li:last-child {
+        /* 隐藏下拉箭头 */
+        .dropdown > a::after {
             display: none;
+        }
+
+        /* TIDEMASTER 链接指向主页 */
+        .dropdown > a {
+            pointer-events: auto;
         }
     }
 
@@ -927,16 +896,11 @@
             <!-- 主导航 -->
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li class="dropdown">
-                        <a href="#">TIDEMASTER</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="TideMaster Cat.html">TIDEMASTER CAT</a></li>
-                            <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
-                        </ul>
+                    <li>
+                        <a href="../index.html">TIDEMASTER</a>
                     </li>
                     <li><a href="../index.html#tech-features">WHY TIDEMASTER</a></li>
                     <li><a href="#contact">CONTACT</a></li>
-                    <li><a href="#contact">BECOME DEALER</a></li>
                 </ul>
             </nav>
         </div>

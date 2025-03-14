@@ -69,11 +69,23 @@
 
     .main-header .container {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 1rem;
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+
+    .nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
 
     .main-header nav ul {
@@ -521,14 +533,14 @@
 
     .table-header {
         display: grid;
-        grid-template-columns: 180px repeat(6, 1fr);
+        grid-template-columns: 90px repeat(6, 1fr);
         background: rgba(255, 255, 255, 0.05);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .table-row {
         display: grid;
-        grid-template-columns: 180px repeat(6, 1fr);
+        grid-template-columns: 90px repeat(6, 1fr);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -537,10 +549,14 @@
     }
 
     .row-header {
-        padding: 1rem;
+        padding: 0.8rem;
         font-weight: 500;
         background: rgba(255, 255, 255, 0.02);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
     }
 
     .col-package {
@@ -731,6 +747,172 @@
     .submit-order-section .btn {
         min-width: 200px; /* 设置最小宽度确保按钮大小合适 */
     }
+
+    /* 添加/更新移动端响应式样式 */
+    @media (max-width: 768px) {
+        /* 发动机选项移动端适配 */
+        .config-grid {
+            grid-template-columns: 1fr;
+            padding: 0 1rem;
+        }
+
+        .config-option {
+            margin-bottom: 1rem;
+        }
+
+        .config-option label {
+            padding: 1rem;
+        }
+
+        .option-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .option-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .option-price {
+            margin-top: 0.5rem;
+        }
+
+        /* 导航和电子设备表格移动端适配 */
+        .nav-electronics-table {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0 1rem;
+        }
+
+        .table-header,
+        .table-row {
+            grid-template-columns: 90px repeat(6, 1fr);
+            min-width: 800px;
+        }
+
+        .row-header {
+            padding: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        /* 添加横向滚动提示 */
+        .nav-electronics-table::before {
+            content: '← Scroll horizontally →';
+            display: block;
+            text-align: center;
+            padding: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* 调整表格内容的显示 */
+        .package-content {
+            padding: 0.8rem;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .col-package {
+            padding: 0.8rem;
+        }
+
+        .row-header {
+            position: sticky;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1;
+        }
+
+        /* 调整配置选项的间距 */
+        .configurations {
+            margin: 2rem 0;
+        }
+
+        .configurations h2 {
+            padding: 0 1rem;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    /* 平板设备优化 */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .nav-electronics-table {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-header,
+        .table-row {
+            min-width: 800px;
+        }
+
+        .config-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            padding: 0 1.5rem;
+        }
+    }
+
+    /* 更新移动端下拉菜单样式 */
+    @media (max-width: 768px) {
+        /* 导航下拉菜单 */
+        .dropdown-menu {
+            position: static;
+            transform: none;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+            opacity: 1;
+            visibility: visible;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* BUILD YOUR BOAT 按钮下拉菜单 */
+        .header-actions .dropdown {
+            width: 100%;
+        }
+
+        .header-actions .dropdown-menu {
+            position: absolute;
+            left: 0;
+            right: 0;
+            transform: none;
+            top: 100%;
+            width: 100%;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        .header-actions .dropdown-menu li {
+            padding: 0.5rem 0;
+        }
+
+        .header-actions .dropdown-menu a {
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            display: block;
+        }
+
+        /* 确保下拉菜单在按钮下方显示 */
+        .header-actions {
+            position: relative;
+        }
+
+        /* 调整按钮样式 */
+        .build-btn {
+            width: 100%;
+            margin-bottom: 0;
+        }
+    }
     </style>
 </head>
 <body>
@@ -757,17 +939,6 @@
                     <li><a href="#contact">BECOME DEALER</a></li>
                 </ul>
             </nav>
-
-            <!-- 右侧操作区 -->
-            <div class="header-actions">
-                <div class="dropdown">
-                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
-                    <ul class="dropdown-menu">
-                        <li><a href="TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
-                        <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </header>
 

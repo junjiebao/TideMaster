@@ -69,11 +69,23 @@
 
     .main-header .container {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end; /* 改为右对齐 */
         align-items: center;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 1rem;
+    }
+
+    .logo {
+        margin-right: auto; /* Logo 保持在左侧 */
+    }
+
+    .nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
 
     .main-header nav ul {
@@ -495,25 +507,23 @@
         }
     }
 
-    /* 导航和电子设备表格样式 */
+    /* 更新导航和电子设备表格样式 */
     .nav-electronics-table {
         width: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-        overflow: hidden;
-        background: rgba(0, 0, 0, 0.3);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .table-header {
         display: grid;
-        grid-template-columns: 180px repeat(6, 1fr);
+        grid-template-columns: 90px repeat(2, minmax(200px, 1fr)); /* 设置最小宽度确保内容显示 */
         background: rgba(255, 255, 255, 0.05);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .table-row {
         display: grid;
-        grid-template-columns: 180px repeat(6, 1fr);
+        grid-template-columns: 90px repeat(2, minmax(200px, 1fr)); /* 与header保持一致 */
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -522,10 +532,14 @@
     }
 
     .row-header {
-        padding: 1rem;
+        padding: 0.8rem;
         font-weight: 500;
         background: rgba(255, 255, 255, 0.02);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
     }
 
     .col-package {
@@ -556,50 +570,38 @@
         background: rgba(255, 255, 255, 0.02);
     }
 
-    /* 产品页响应式样式 */
+    /* 移动端适配 */
     @media (max-width: 768px) {
-        /* 产品图库适配 */
-        .product-gallery {
-            flex-direction: column;
+        .nav-electronics-table {
+            margin: 0 1rem;
         }
 
-        .main-image {
-            width: 100%;
-            margin-bottom: 1rem;
+        .table-header,
+        .table-row {
+            min-width: 700px; /* 增加最小宽度确保所有内容可见 */
         }
 
-        .thumbnails {
-            flex-direction: row;
-            overflow-x: auto;
-            width: 100%;
+        /* 添加横向滚动提示 */
+        .nav-electronics-table::before {
+            content: '← Scroll horizontally →';
+            display: block;
+            text-align: center;
+            padding: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
         }
 
-        .thumbnail {
-            width: 100px;
-            flex-shrink: 0;
+        .col-package {
+            padding: 0.8rem;
+            min-width: 200px; /* 确保每列有足够空间 */
         }
 
-        /* 配置选项适配 */
-        .config-section {
-            padding: 2rem 1rem;
-        }
-
-        .config-options {
-            grid-template-columns: 1fr;
-        }
-
-        .config-option {
-            padding: 1rem;
-        }
-
-        /* 表单适配 */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
+        .package-content {
+            padding: 0.8rem;
+            min-width: 200px;
         }
     }
 
@@ -802,17 +804,6 @@
                     <li><a href="#contact">BECOME DEALER</a></li>
                 </ul>
             </nav>
-
-            <!-- 右侧操作区 -->
-            <div class="header-actions">
-                <div class="dropdown">
-                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
-                    <ul class="dropdown-menu">
-                        <li><a href="TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
-                        <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </header>
 

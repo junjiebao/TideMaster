@@ -171,19 +171,21 @@
         font-size: 2.5rem;
     }
 
+    /* 更新特性网格布局 */
     .features-grid {
         display: flex;
         justify-content: center;
-        gap: 3rem;
-        max-width: 1200px;
+        gap: 2rem;
+        max-width: 1400px; /* 增加最大宽度以适应四列 */
         margin: 0 auto;
         padding: 0 2rem;
     }
 
     .feature {
         flex: 1;
-        max-width: 300px;
+        max-width: 280px; /* 调整每列的最大宽度 */
         text-align: center;
+        padding: 1.5rem;
     }
 
     .feature h3 {
@@ -198,6 +200,19 @@
         color: var(--text-gray);
     }
 
+    /* 移动端适配 */
+    @media (max-width: 1200px) {
+        .features-grid {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature {
+            flex: 0 1 calc(50% - 2rem);
+            max-width: 100%;
+        }
+    }
+
     @media (max-width: 768px) {
         .features-grid {
             flex-direction: column;
@@ -206,6 +221,8 @@
         }
 
         .feature {
+            flex: 1;
+            width: 100%;
             max-width: 100%;
         }
     }
@@ -476,6 +493,61 @@
             margin: 0;
         }
     }
+
+    /* 更新链接样式 */
+    .boat-card a {
+        text-decoration: none;
+        color: var(--text-light);
+    }
+
+    .boat-info h2 {
+        color: var(--text-light);
+        text-decoration: none;
+        margin-bottom: 1rem;
+    }
+
+    .boat-info p {
+        color: var(--text-gray);
+        text-decoration: none;
+    }
+
+    /* 更新标题样式 */
+    .section-title {
+        color: var(--text-light);
+        text-decoration: none;
+    }
+
+    /* 确保所有链接没有下划线 */
+    a {
+        text-decoration: none;
+    }
+
+    /* 更新导航链接样式 */
+    .nav-list a {
+        color: var(--text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-list a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 更新下拉菜单链接样式 */
+    .dropdown-menu a {
+        color: var(--text-light);
+        text-decoration: none;
+        display: block;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--primary-color);
+    }
     </style>
 </head>
 <body class="dark-theme">
@@ -498,8 +570,8 @@
                         </ul>
                     </li>
                     <li><a href="#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="ai-integration.html">AI INTEGRATION</a></li>
                     <li><a href="#contact">CONTACT</a></li>
-                    <li><a href="#contact">BECOME DEALER</a></li>
                 </ul>
             </nav>
 
@@ -641,6 +713,7 @@
                             <li>Ergonomic interior layout and luxurious features</li>
                             <li>Modular structure and customizable options</li>
                             <li>Extreme corrosion resistance and safty performance</li>
+                            <li>Advanced Artificial Intelligence System Integration</li>
                         </ul>
                     </div>
                 </div>
@@ -664,6 +737,10 @@
                 <div class="feature">
                     <h3>Customizable</h3>
                     <p>Meet your personalized needs with our customizable options</p>
+                </div>
+                <div class="feature">
+                    <h3>AI Integration</h3>
+                    <p>Advanced AI-powered navigation and smart control systems</p>
                 </div>
             </div>
         </div>

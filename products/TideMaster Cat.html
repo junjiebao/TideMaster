@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TideMaster Hunter 28 - TideMaster Marine Technology</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    /* 基础深色主题和背景 */
+    :root {
+        --primary-color: #e31837;
+        --dark-bg: #111111;
+        --text-light: #ffffff;
+        --text-gray: #888888;
+    }
+
+    body {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 六边形背景图案 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #000000;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0l10.392 6v12L12 24 1.607 18V6z' fill-opacity='0.05' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+        background-size: 14px 14px;
+        opacity: 1;
+    }
+
+    /* 中间向两边的渐变遮罩 */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 40%,
+            rgba(0, 0, 0, 0.8) 80%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+
+    /* 统一导航栏样式 */
+    .main-header {
+        background-color: rgba(17, 17, 17, 0.95);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+
+    .logo-img {
+        height: 40px;
+        width: auto;
+    }
+
+    .nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+    }
+
+    .nav-list a {
+        color: var(--text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-list a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 页脚样式统一 */
+    .main-footer {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        padding: 4rem 0 0;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    .footer-logo {
+        margin-bottom: 1.5rem;
+    }
+
+    .logo-img {
+        max-width: 120px;
+        height: auto;
+    }
+
+    .company-desc {
+        color: var(--text-gray);
+        line-height: 1.6;
+    }
+
+    .footer-section h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+    }
+
+    .contact-info p {
+        margin-bottom: 0.5rem;
+        color: var(--text-gray);
+    }
+
+    .phone {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-light) !important;
+    }
+
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-link i {
+        font-size: 20px;
+    }
+
+    /* 为不同的社交媒体设置悬停颜色 */
+    .social-link[title="WeChat"]:hover {
+        background: #07C160;
+    }
+
+    .social-link[title="Weibo"]:hover {
+        background: #E6162D;
+    }
+
+    .social-link[title="TikTok"]:hover {
+        background: #000000;
+    }
+
+    .social-link[title="Instagram"]:hover {
+        background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    }
+
+    .social-link[title="Snapchat"]:hover {
+        background: #FFFC00;
+        color: #000;
+    }
+
+    .social-link[title="X"]:hover {
+        background: #000000;
+    }
+
+    .social-link[title="Facebook"]:hover {
+        background: #1877F2;
+    }
+
+    .social-link[title="YouTube"]:hover {
+        background: #FF0000;
+    }
+
+    .quick-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .quick-links li {
+        margin-bottom: 0.75rem;
+    }
+
+    .quick-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .quick-links a:hover {
+        color: var(--text-light);
+    }
+
+    .footer-bottom {
+        margin-top: 4rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .copyright {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .legal-links {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .legal-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.3s ease;
+    }
+
+    .legal-links a:hover {
+        color: var(--text-light);
+    }
+
+    .credits {
+        color: var(--text-gray);
+        font-size: 0.875rem;
+    }
+
+    .credits a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .credits a:hover {
+        color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-bottom .container {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .copyright {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .legal-links {
+            justify-content: center;
+        }
+    }
+
+    /* 内容区域样式优化 */
+    .product-detail {
+        padding-top: 120px; /* 增加顶部内边距，确保内容不被导航栏遮挡 */
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 8px;
+        margin: 2rem auto;
+        max-width: 1200px;
+    }
+
+    .product-header {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px 8px 0 0;
+    }
+
+    .specifications,
+    .configurations,
+    .standard-config {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 3rem 2rem;
+        margin: 2rem 0;
+        border-radius: 8px;
+    }
+
+    .spec-item,
+    .config-option,
+    .config-group {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .spec-item:hover,
+    .config-option:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* 产品标题区域 */
+    .product-hero {
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/hero-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 4rem;
+    }
+
+    .product-hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .product-hero p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* 产品详情页样式 */
+    .product-detail {
+        padding-top: 120px; /* 增加顶部内边距，确保内容不被导航栏遮挡 */
+        color: #ffffff;
+    }
+
+    .product-header {
+        text-align: center;
+        margin-bottom: 4rem;
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .product-header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .product-tagline {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* 产品图片展示样式 */
+    .product-gallery {
+        margin: 4rem 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .main-image {
+        grid-column: span 2;
+        width: 100%;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .thumbnails {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .thumbnails img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .thumbnails img:hover {
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+        .product-gallery {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .main-image {
+            grid-column: span 1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .thumbnails {
+            grid-column: span 1;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .thumbnails img {
+            height: 250px;
+            margin-bottom: 0;
+        }
+    }
+
+    /* 规格部分 */
+    .specifications {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4rem 0;
+        margin: 4rem 0;
+    }
+
+    .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .spec-item {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .spec-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .spec-item h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    /* 配置选项 */
+    .configurations {
+        padding: 4rem 0;
+    }
+
+    .config-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .config-option {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .config-option:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* 价格计算器 */
+    .price-calculator {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+    }
+
+    .price-display {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .price-display > div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .total-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        border-bottom: none !important;
+    }
+
+    /* 相关产品 */
+    .related-products {
+        padding: 4rem 0;
+    }
+
+    .related-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+        margin: 3rem auto;
+        max-width: 1400px;
+    }
+
+    .related-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .related-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+    }
+
+    .related-card h3 {
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    /* 按钮样式 */
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #e31837;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff1f41;
+    }
+
+    .btn-secondary {
+        border: 2px solid #e31837;
+        color: #e31837;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e31837;
+        color: white;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .product-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .product-tagline {
+            font-size: 1.2rem;
+        }
+        
+        .spec-grid,
+        .config-grid,
+        .related-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* 下拉菜单样式 */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu,
+    .build-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 200px;
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-list li {
+        padding: 0.5rem 0;
+    }
+
+    .menu-list a {
+        display: block;
+        padding: 0.5rem 1.5rem;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .menu-list a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 悬停显示下拉菜单 */
+    .dropdown:hover .dropdown-menu,
+    .dropdown:hover .build-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* BUILD YOUR BOAT 按钮样式 */
+    .header-actions .btn {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .header-actions .btn:hover {
+        background-color: #ff1f41;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .dropdown-menu,
+        .build-menu {
+            position: static;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            display: none;
+            background: transparent;
+            border: none;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:hover .build-menu {
+            display: block;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .related-grid {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+        }
+    }
+
+    /* 更新导航和电子设备表格样式 */
+    .nav-electronics-table {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-header {
+        display: grid;
+        grid-template-columns: 90px repeat(2, minmax(200px, 1fr)); /* 设置最小宽度确保内容显示 */
+        background: rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-row {
+        display: grid;
+        grid-template-columns: 90px repeat(2, minmax(200px, 1fr)); /* 与header保持一致 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-row:last-child {
+        border-bottom: none;
+    }
+
+    .row-header {
+        padding: 0.8rem;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.02);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+    }
+
+    .col-package {
+        padding: 1rem;
+        text-align: center;
+        font-weight: 600;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .package-content {
+        padding: 1rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .package-content:last-child,
+    .col-package:last-child {
+        border-right: none;
+    }
+
+    .empty-cell {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .nav-electronics-table {
+            margin: 0 1rem;
+        }
+
+        .table-header,
+        .table-row {
+            min-width: 700px; /* 增加最小宽度确保所有内容可见 */
+        }
+
+        /* 添加横向滚动提示 */
+        .nav-electronics-table::before {
+            content: '← Scroll horizontally →';
+            display: block;
+            text-align: center;
+            padding: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .col-package {
+            padding: 0.8rem;
+            min-width: 200px; /* 确保每列有足够空间 */
+        }
+
+        .package-content {
+            padding: 0.8rem;
+            min-width: 200px;
+        }
+    }
+
+    /* 移动端导航栏优化 */
+    @media (max-width: 768px) {
+        .main-header {
+            padding: 0;
+            height: auto;
+        }
+
+        .main-header .container {
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .logo {
+            margin: 0;
+            padding: 0.5rem 0;
+        }
+
+        .logo-img {
+            height: 32px;
+        }
+
+        .nav-list {
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 0.5rem 0;
+            padding: 0;
+        }
+
+        .nav-list a {
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .header-actions {
+            margin: 0.5rem 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-actions .btn {
+            width: 100%;
+            max-width: 200px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-detail {
+            padding-top: 160px; /* 移动端增加更多顶部内边距 */
+        }
+
+        .product-header {
+            padding: 2rem 1rem;
+        }
+
+        .product-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-tagline {
+            font-size: 1rem;
+        }
+
+        /* 下拉菜单移动端样式优化 */
+        .dropdown-menu,
+        .build-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 0.5rem 0;
+        }
+
+        .menu-list {
+            padding: 0;
+        }
+
+        .menu-list a {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    /* 平板设备优化 */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .product-detail {
+            padding-top: 100px;
+        }
+
+        .nav-list {
+            gap: 1.5rem;
+        }
+
+        .header-actions {
+            margin-left: 1.5rem;
+        }
+    }
+
+    /* 标准配置样式 */
+    .standard-config {
+        padding: 4rem 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        margin: 2rem 0;
+    }
+
+    .standard-config h2 {
+        color: var(--text-light);
+        text-align: left;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        padding-left: 1rem;
+    }
+
+    .standard-config-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 改为2列 */
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .standard-config .config-group {
+        background: rgba(17, 17, 17, 0.8);
+        padding: 2.5rem;
+        border-radius: 8px;
+        min-height: 420px; /* 增加高度以适应更多内容 */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .standard-config .config-group h3 {
+        color: #e31837;
+        margin-bottom: 2rem;
+        font-size: 1.4rem; /* 增大标题字号 */
+        text-transform: uppercase;
+        text-align: left;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .standard-config .config-group h3::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 3rem;
+        height: 2px;
+        background-color: #e31837;
+    }
+
+    .standard-config .config-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    .standard-config .config-list li {
+        color: var(--text-light);
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.1rem; /* 增大文字字号 */
+        line-height: 1.6;
+    }
+
+    .standard-config .config-list li:last-child {
+        border-bottom: none;
+    }
+
+    /* 移动端响应式 */
+    @media (max-width: 992px) {
+        .standard-config-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .standard-config .config-group {
+            min-height: auto;
+            padding: 2rem;
+        }
+        
+        .standard-config {
+            padding: 2rem 1rem;
+        }
+        
+        .standard-config h2 {
+            font-size: 1.8rem;
+            text-align: center;
+            padding-left: 0;
+        }
+    }
+
+    /* 添加到现有的 CSS 中 */
+    .submit-order-section {
+        display: flex;
+        justify-content: flex-end; /* 右对齐 */
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+
+    .submit-order-section .btn {
+        min-width: 200px; /* 设置最小宽度确保按钮大小合适 */
+    }
+
+    /* AI功能相关样式 */
+    .ai-features {
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        margin: 2rem 0;
+    }
+
+    .ai-features h2 {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--text-light);
+        font-size: 2.5rem;
+    }
+
+    .ai-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 0 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .ai-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .ai-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .ai-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .ai-item h3 {
+        padding: 1.5rem 1.5rem 1rem;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+    }
+
+    .ai-item p {
+        padding: 0 1.5rem 1.5rem;
+        color: var(--text-gray);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .ai-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .ai-item img {
+            height: 200px;
+        }
+    }
+
+    /* 导航栏样式更新 */
+    .header-actions {
+        margin-left: 2rem; /* 增加左侧间距 */
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .main-header .container {
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .nav-list {
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .header-actions {
+            margin: 1rem 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-actions .btn {
+            width: auto;
+            min-width: 200px;
+        }
+    }
+
+    /* 移动端和平板端适配 */
+    @media (max-width: 1024px) {
+        .main-header {
+            padding: 0.5rem 0;
+        }
+
+        .main-header .container {
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            gap: 1rem;
+        }
+
+        .logo {
+            margin: 0;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        /* 隐藏主导航 */
+        .main-nav {
+            display: none;
+        }
+
+        .header-actions {
+            margin: 0;
+        }
+
+        .header-actions .btn {
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+        }
+
+        /* BUILD YOUR BOAT 下拉菜单样式 */
+        .header-actions .dropdown-menu {
+            position: absolute;
+            width: 180px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 0.5rem 0;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
+            display: none;
+            z-index: 1001;
+        }
+
+        .header-actions .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .header-actions .dropdown-menu a {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            text-align: center;
+            display: block;
+            color: var(--text-light);
+        }
+
+        .product-detail {
+            padding-top: 100px;
+        }
+    }
+
+    /* 移动端特定优化 */
+    @media (max-width: 768px) {
+        .logo-img {
+            height: 28px;
+        }
+
+        .header-actions .btn {
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .header-actions .dropdown-menu {
+            width: 160px;
+        }
+
+        .header-actions .dropdown-menu a {
+            font-size: 0.75rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- 更新导航栏部分 -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <a href="../index.html" class="logo">
+                <img src="../images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+            </a>
+
+            <!-- 主导航 -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="dropdown">
+                        <a href="#">TIDEMASTER</a>
+                        <ul class="dropdown-menu">
+                                    <li><a href="TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                                    <li><a href="TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
+                                    <li><a href="TideMaster Lounge.html">TIDEMASTER LOUNGE</a></li>
+                                </ul>
+                    </li>
+                    <li><a href="../index.html#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="../ai-integration.html">AI INTEGRATION</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="dropdown">
+                    <a href="#" class="btn btn-primary">BUILD YOUR BOAT</a>
+                    <div class="build-menu">
+                            <ul class="menu-list">
+                                <li><a href="TideMaster Cat.html">TideMaster Cat 38</a></li>
+                            <li><a href="TideMaster Hunter.html">TideMaster Hunter 28</a></li>
+                            <li><a href="TideMaster Lounge.html">TideMaster Lounge 38</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 产品详情 -->
+    <main class="product-detail">
+        <div class="container">
+            <!-- 产品标题 -->
+            <div class="product-header">
+<h1>TIDEMASTER Cat 38</h1>
+                <p class="product-tagline">Unsinkable, Spacious, High-Performance Boat</p>
+            </div>
+
+            <!-- 产品图片展示 -->
+            <section class="product-gallery">
+                <div class="main-image">
+                    <img src="../images\20250102145728.jpg" alt="38英尺双体船主图">
+                </div>
+                <div class="thumbnails">
+                    <img src="../images\starboard.png" alt="38英尺双体船图片1">
+                    <img src="../images\starbboard up.png" alt="38英尺双体船图片2">
+                    <img src="../images\top.png" alt="38英尺双体船图片3">
+                </div>
+            </section>
+
+            <!-- 技术规格 -->
+            <section class="specifications">
+                <h2>TECHNICAL SPECIFICATIONS</h2>
+                <div class="spec-grid">
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Length Overall</h3>
+                            <p>11.7 m</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Beam</h3>
+                            <p>3.5 m</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Draft</h3>
+                            <p>0.6 m</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Material</h3>
+                            <p>Aluminum Alloy 5083-H116 and 5052-H32</p>
+                        </div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Maximum Power</h3>
+                            <p>Twin 400 HP (800 HP Total)</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Bottom Plate</h3>
+                            <p>6 mm</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Side Plate</h3>
+                            <p>4 mm</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Fuel Capacity</h3>
+                            <p>940 L</p>
+                        </div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Transom Plate</h3>
+                            <p>9 mm</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Fresh Water</h3>
+                            <p>170 L</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Dry Weight</h3>
+                            <p>3,200 kg</p>
+                        </div>
+                        <div class="spec-item">
+                            <h3>Maximum Capacity</h3>
+                            <p>10 persons</p>
+                        </div>
+                    </div>
+                    <div class="spec-row">
+                        <div class="spec-item">
+                            <h3>Internal Freeboard</h3>
+                            <p>850-900 mm</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 标准配置部分 -->
+            <section class="standard-config">
+                <h2>STANDARD CONFIGURATIONS</h2>
+                <div class="standard-config-grid">
+                    <!-- 船体结构 -->
+                    <div class="config-group">
+                        <h3>HULL & STRUCTURE</h3>
+                        <ul class="config-list">
+                            <li>Aluminum magnesium alloy 5083-H116 & 5052-H32 hull construction (4-6mm thickness) (0AED)</li>
+                            <li>Longitudinal and transverse stringer system (0AED)</li>
+                            <li>AkzoNobel® AWLGRIP solid color exterior paint (0AED)</li>
+                            <li>2 coats epoxy primer + 3 coats anti-fouling paint (0AED)</li>
+                            <li>Four 316 stainless steel cleats with back plates (0AED)</li>
+                            <li>FRP composite hardtop - vacuum-infused, PVC foam core (0AED)</li>
+                            <li>Stainless steel anchor with 100' rode (8mm chain) (0AED)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 甲板特性 -->
+                    <div class="config-group">
+                        <h3>DECK FEATURES</h3>
+                        <ul class="config-list">
+                            <li>Adjustable helm seats with non-water-absorbing foam cushions (0AED)</li>
+                            <li>Fold-down rear seats (0AED)</li>
+                            <li>PVC synthetic teak decks (0AED)</li>
+                            <li>Hull-side storage bays (0AED)</li>
+                            <li>Main deck storage lockers (0AED)</li>
+                            <li>Foredeck anchor locker (0AED)</li>
+                            <li>Live bait tank with cutting board (0AED)</li>
+                            <li>Self-draining deck system (0AED)</li>
+                            <li>LED step lights (0AED)</li>
+                            <li>Retractable swim ladder (0AED)</li>
+                            <li>Rocket launcher with 7 rod racks (0AED)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 电气系统 -->
+                    <div class="config-group">
+                        <h3>ELECTRICAL SYSTEM</h3>
+                        <ul class="config-list">
+                            <li>12V DC + 120V/60Hz AC via inverter system (0AED)</li>
+                            <li>Two 12V/200AH deep-cycle batteries (0AED)</li>
+                            <li>JMT® 40A DC charger + 3000W AC inverter (0AED)</li>
+                            <li>LED lighting throughout (0AED)</li>
+                            <li>AQUA SIGNAL® navigation lights (0AED)</li>
+                            <li>Remote searchlight (0AED)</li>
+                            <li>50-amp shore power connection (0AED)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 机械系统 -->
+                    <div class="config-group">
+                        <h3>MECHANICAL SYSTEMS</h3>
+                        <ul class="config-list">
+                            <li>12V DC blowers for bilge and head ventilation (0AED)</li>
+                            <li>Fresh water pump system (0AED)</li>
+                            <li>Waste discharge pump (0AED)</li>
+                            <li>2000gph bilge pump + emergency manual pump (0AED)</li>
+                            <li>TACMA® electric marine head (0AED)</li>
+                            <li>UFLRX® steering system (0AED)</li>
+                            <li>103 gal aluminum fuel tank with gauges (0AED)</li>
+                            <li>26 gal aluminum holding tank with deck pump-out (0AED)</li>
+                            <li>5-year transferable hull structure warranty (0AED)</li>
+                            <li>1-year limited warranty on 3rd-party equipment (0AED)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 引擎选项 -->
+            <section class="configurations">
+                <h2>ENGINE OPTIONS</h2>
+                <div class="config-grid">
+                    <div class="config-group">
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio" value="verado-250">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 250HP V8</span>
+                                    <span class="option-description">Total power output: 500HP</span>
+                                </div>
+                                <span class="option-price">AED 205,000</span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio" value="verado-300">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 300HP V8</span>
+                                    <span class="option-description">Total power output: 600HP</span>
+                                </div>
+                                <span class="option-price">AED 220,000</span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 350HP</span>
+                                    <span class="option-description">Total power output: 700HP</span>
+                    </div>
+                                <span class="option-price">AED 242,000</span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 400HP</span>
+                                    <span class="option-description">Total power output: 800HP</span>
+                                </div>
+                                <span class="option-price">AED 260,000</span>
+                            </label>
+                        </div>
+                        <div class="config-option">
+                            <label>
+                                <input type="radio" name="engine" class="config-radio">
+                                <div class="option-content">
+                                    <span class="option-title">Twin MERCURY VERADO 400R</span>
+                                    <span class="option-description">High performance racing engine</span>
+                                </div>
+                                <span class="option-price">AED 280,000</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 导航和电子设备选项 -->
+            <section class="configurations">
+                <h2>NAVIGATION & ELECTRONICS OPTIONS</h2>
+                <div class="nav-electronics-table">
+                    <div class="table-header">
+                        <div class="row-header"></div>
+                        <div class="col-package">
+                            <div>GARMIN SPORT</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="garmin-sport" title="Select Garmin Sport Package" aria-label="Select Garmin Sport Package">
+                            </label>
+                            <span class="package-price">AED 40,000</span>
+                </div>
+                        <div class="col-package">
+                            <div>GARMIN PRO</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="garmin-pro" title="Select Garmin Pro Package" aria-label="Select Garmin Pro Package">
+                            </label>
+                            <span class="package-price">AED 147,000</span>
+                        </div>
+                        <div class="col-package">
+                            <div>RAYMARINE SPORT</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="raymarine-sport" title="Select Raymarine Sport Package" aria-label="Select Raymarine Sport Package">
+                            </label>
+                            <span class="package-price">AED 50,000</span>
+                        </div>
+                        <div class="col-package">
+                            <div>RAYMARINE PRO</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="raymarine-pro" title="Select Raymarine Pro Package" aria-label="Select Raymarine Pro Package">
+                            </label>
+                            <span class="package-price">AED 180,000</span>
+                        </div>
+                        <div class="col-package">
+                            <div>TIDEMASTER + Garmin Combo</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="tidemaster-sport" title="Select TideMaster Garmin Combo Package" aria-label="Select TideMaster Garmin Combo Package">
+                            </label>
+                            <span class="package-price">AED 200,000</span>
+                        </div>
+                        <div class="col-package">
+                            <div>TIDEMASTER + Raymarine Combo</div>
+                            <label class="radio-label">
+                                <input type="radio" name="nav-package" value="tidemaster-pro" title="Select TideMaster Raymarine Combo Package" aria-label="Select TideMaster Raymarine Combo Package">
+                            </label>
+                            <span class="package-price">AED 220,000</span>
+                        </div>
+                    </div>
+
+                    <!-- MDF 行 -->
+                    <div class="table-row">
+                        <div class="row-header">MDF</div>
+                        <div class="package-content">Twin Garmin GPSMAP® 8412xsv MFDs</div>
+                        <div class="package-content">Twin Garmin GPSMAP® 8416 MFDs</div>
+                        <div class="package-content">Twin Raymarine Axiom Pro 12 MFDs</div>
+                        <div class="package-content">Twin Raymarine Axiom Pro 16 MFDs</div>
+                        <div class="package-content">Garmin GPSMAP® 8416 And TIDEMASTER MFDs</div>
+                        <div class="package-content">Raymarine Axiom Pro 16 And TIDEMASTER MFDs</div>
+                    </div>
+
+                    <!-- Radar 行 -->
+                    <div class="table-row">
+                        <div class="row-header">Radar</div>
+                        <div class="package-content">GARMIN GMR™ 18 xHD3</div>
+                        <div class="package-content">Garmin GMR™ 1234 xHD3 Open Array Radar and Pedestal 4Ft</div>
+                        <div class="package-content">Raymarine Quantum 2 CHIRP Doppler Radar</div>
+                        <div class="package-content">Raymarine Cyclone open array radars 4Ft</div>
+                        <div class="package-content">Garmin GMR™ 1234 xHD3 Open Array Radar and Pedestal 4Ft</div>
+                        <div class="package-content">Raymarine Cyclone open array radars 4Ft</div>
+                    </div>
+
+                    <!-- 继续添加其他行... -->
+                    <!-- MARINE VHF RADIOS 行 -->
+                    <div class="table-row">
+                        <div class="row-header">MARINE VHF RADIOS</div>
+                        <div class="package-content">VHF 115 Marine Radio</div>
+                        <div class="package-content">VHF 215 Garmin AIS™ Marine Radio</div>
+                        <div class="package-content">Ray53 VHF Radio</div>
+                        <div class="package-content">Raymarine Ray63 radio</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+
+                    <!-- 添加剩余的行 -->
+                    <div class="table-row">
+                        <div class="row-header">Sonar Module</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">GSD™ 28 Sonar Module</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">CP570 Sonar Module</div>
+                        <div class="package-content">Garmin GSD™ 28 Sonar Modulen</div>
+                        <div class="package-content">Raymarine CP570 Sonar Module</div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="row-header">Transducer</div>
+                        <div class="package-content">Garmin GT23M-TM</div>
+                        <div class="package-content">AIRMAR® R109LH Chirp-ready Thru-hull External Mount</div>
+                        <div class="package-content">Raymarine RV-100 RealVision™ 3D Transom Mount Transducer</div>
+                        <div class="package-content">AIRMAR® R109LH Chirp-ready Thru-hull External Mount</div>
+                        <div class="package-content">AIRMAR® R109LH Chirp-ready Thru-hull External Mount</div>
+                        <div class="package-content">AIRMAR® R109LH Chirp-ready Thru-hull External Mount</div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="row-header">NightVision</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">FLIR CAMERA - M332 WITH JOYSTICK UNIT</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">FLIR CAMERA - M332 WITH JOYSTICK UNIT</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="row-header">Autopilot</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">Reactor™ 40 Hydraulic Corepack with SmartPump v2 With GHC™ 50 Autopilot Instrument</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">Raymarine EV-400 Power Evolution Autopilot package</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="row-header">Intelligent Navigation</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="row-header">Autonomous Pilot</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="row-header">Dynamic Positioning</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="row-header">Auto Docking</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content empty-cell">N/A</div>
+                        <div class="package-content">TIDEMASTER</div>
+                        <div class="package-content">TIDEMASTER</div>
+                    </div>
+
+                    <!-- 添加剩余所有行... -->
+                </div>
+            </section>
+
+            <!-- 可选配件 -->
+            <section class="optional-accessories">
+                <h2>OTHER OPTIONAL ACCESSORIES</h2>
+                <div class="config-grid">
+                    <!-- 左列 -->
+                    <div class="config-column">
+                        <!-- 照明和视觉系统 -->
+                        <div class="config-group">
+                            <h3>Lighting, Charging & Vision</h3>
+                            <div class="config-option">
+                            <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">14pcs Premium Push Buttons</span>
+                                    </div>
+                                    <span class="option-price">AED 4,000</span>
+                                </label>
+                            </div><div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">2pcs Rokk Wireless Nano Charger</span>
+                                    </div>
+                                    <span class="option-price">AED 1,400</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Rokk Flip Pro with Front Fit Beze</span>
+                                    </div>
+                                    <span class="option-price">AED 250</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">T-Top Front LED Light Bar</span>
+                                    </div>
+                                    <span class="option-price">AED 2,500</span>
+                            </label>
+                        </div>
+                            <div class="config-option">
+                            <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">T-Top aft LED Light Bar</span>
+                                    </div>
+                                    <span class="option-price">AED 1,200</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Underwater Light -Lumetic Spectrum Blue With White</span>
+                                    </div>
+                                    <span class="option-price">AED 3,500</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">FLIR CAMERA - M232</span>
+                                    </div>
+                                    <span class="option-price">AED 12,500</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">FLIR CAMERA - M300</span>
+                                    </div>
+                                    <span class="option-price">AED 32,500</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">FLIR CAMERA - M364C - STABILIZED 9HZ THERMAL CAMERA WITH JOYSTICK</span>
+                                    </div>
+                                    <span class="option-price">AED 72,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Courtesy LED Lights on the Deck</span>
+                                    </div>
+                                    <span class="option-price">AED 3,200</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Front and Back Security/Action Cameras</span>
+                                    </div>
+                                    <span class="option-price">AED 3,500</span>
+                            </label>
+                        </div>
+                    </div>
+
+                        <!-- 甲板和船体 -->
+                        <div class="config-group">
+                            <h3>Deck & Hull</h3>
+                            <div class="config-option">
+                            <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Hull Side Door</span>
+                                    </div>
+                                    <span class="option-price">AED 6,800 Per Side</span>
+                            </label>
+                        </div>
+                            <div class="config-option">
+                            <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Non-slip SeaDeck</span>
+                                    </div>
+                                    <span class="option-price">AED 26,800</span>
+                            </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Premium Rod Holders 12pcs</span>
+                                    </div>
+                                    <span class="option-price">AED 3,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Premium Rod Holders 20pcs</span>
+                                    </div>
+                                    <span class="option-price">AED 4,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Bow Grab Rails</span>
+                                    </div>
+                                    <span class="option-price">AED 6,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Upgraded Pull Up Cleats 6pcs</span>
+                                    </div>
+                                    <span class="option-price">AED 1,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Foldable Swim Ladder: Garelick Ladder 4 Step Periscope</span>
+                                    </div>
+                                    <span class="option-price">AED 4,300</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Upgraded Trim Tabs with Pro Control Assist</span>
+                                    </div>
+                                    <span class="option-price">AED 9,800</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Standard Trim Tabs</span>
+                                    </div>
+                                    <span class="option-price">AED 4,800</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Upgraded 38MM diameter Handrails and Swimming platform rails</span>
+                                    </div>
+                                    <span class="option-price">AED 8,800</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">6pcs Scuba Tanks Easy Access Storage Shelves</span>
+                                    </div>
+                                    <span class="option-price">AED 2,200</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">2pcs Wash Down Systems(One fresh water and one salt water)</span>
+                                    </div>
+                                    <span class="option-price">AED 2,400</span>
+                                </label>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    <!-- 右列 -->
+                    <div class="config-column">
+                        <!-- 动力和系统 -->
+                        <div class="config-group">
+                            <h3>Power & Systems</h3>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">T-Top Solar Charging System</span>
+                </div>
+                                    <span class="option-price">AED 7,600</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Gyro Stabilizer(With Separated Battery Power Supply)</span>
+                                    </div>
+                                    <span class="option-price">AED 79,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Joystick Piloting (final price depends on the engine models)</span>
+                                    </div>
+                                    <span class="option-price">AED 62,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Upgraded Battery Packs</span>
+                                    </div>
+                                    <span class="option-price">AED 5,800</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Washroom Fresh Water Shower System</span>
+                                    </div>
+                                    <span class="option-price">AED 2,800</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 附加设备 -->
+                        <div class="config-group">
+                            <h3>Additional Equipment</h3>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Premium Helm seats(with Flip up Bolster) and Passenger seats</span>
+                </div>
+                                    <span class="option-price">AED 20,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">2pcs Foldable Seats in the Bow area</span>
+                                    </div>
+                                    <span class="option-price">AED 5,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Removable Stern table</span>
+                    </div>
+                                    <span class="option-price">AED 2,900</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">StarLink Connection with 3 months subscription Package</span>
+                                    </div>
+                                    <span class="option-price">AED 26,000</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Standard Electric Windlass (Anchor, Chain and Rope)</span>
+                                    </div>
+                                    <span class="option-price">AED 6,800</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">316 Stainless Steel Drum Windlass (Anchor, Chain and Rope)</span>
+                        </div>
+                                    <span class="option-price">AED 8,500</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">316 Stainless Steel Heavy Duty Drum Windlass (Anchor, Chain and Rope)</span>
+                                    </div>
+                                    <span class="option-price">AED 16,500</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Sound System(6 Speakers)</span>
+                                    </div>
+                                    <span class="option-price">AED 5,400</span>
+                                </label>
+                            </div>
+                            <div class="config-option">
+                                <label>
+                                    <input type="checkbox">
+                                    <div class="option-content">
+                                        <span class="option-title">Upgraded 6ft Radar</span>
+                                    </div>
+                                    <span class="option-price">AED 25,000</span>
+                                </label>
+                            </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 提交订单 -->
+<section class="submit-order-section">
+                <form id="orderForm" action="../submit-order.html" method="GET">
+                    <input type="hidden" name="model" value="cat">
+                    <input type="hidden" id="selectedEngine" name="engine">
+                    <input type="hidden" id="selectedEnginePrice" name="enginePrice">
+                    <input type="hidden" id="selectedNav" name="nav">
+                    <input type="hidden" id="selectedNavPrice" name="navPrice">
+                    <input type="hidden" id="selectedAccessories" name="accessories">
+                    <input type="hidden" id="selectedAccessoriesPrice" name="accessoriesPrice">
+                    <input type="hidden" id="finalTotalPrice" name="totalPrice">
+                    
+                    <button type="button" class="btn btn-primary" onclick="collectFormData()">Submit Order</button>
+                </form>
+                
+                <script>
+                function collectFormData() {
+                    const basePrice = 450000;
+                    let totalPrice = basePrice;
+                    
+                    // 收集发动机信息
+                    const selectedEngine = document.querySelector('input[name="engine"]:checked');
+                    if (selectedEngine) {
+                        const engineOption = selectedEngine.closest('.config-option');
+                        const engineTitle = engineOption.querySelector('.option-title').textContent;
+                        const enginePriceText = engineOption.querySelector('.option-price').textContent;
+                        const enginePrice = parseInt(enginePriceText.replace(/[^0-9]/g, ''));
+                        
+                        document.getElementById('selectedEngine').value = engineTitle;
+                        document.getElementById('selectedEnginePrice').value = enginePrice;
+                        totalPrice += enginePrice;
+                    }
+
+                    // 收集导航系统信息
+                    const selectedNav = document.querySelector('input[name="nav-package"]:checked');
+                    if (selectedNav) {
+                        const navPackage = selectedNav.closest('.col-package');
+                        const navTitle = navPackage.querySelector('div').textContent;
+                        const navPriceText = navPackage.querySelector('.package-price').textContent;
+                        const navPrice = parseInt(navPriceText.replace(/[^0-9]/g, ''));
+                        
+                        document.getElementById('selectedNav').value = navTitle;
+                        document.getElementById('selectedNavPrice').value = navPrice;
+                        totalPrice += navPrice;
+                    }
+
+                    // 收集配件信息
+                    const selectedAccessories = Array.from(document.querySelectorAll('.optional-accessories input[type="checkbox"]:checked'))
+                        .map(checkbox => {
+                            const option = checkbox.closest('.config-option');
+                            const title = option.querySelector('.option-title').textContent;
+                            const priceText = option.querySelector('.option-price').textContent;
+                            const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+                            return { title, price };
+                        });
+                    
+                    const accessoriesTotal = selectedAccessories.reduce((sum, item) => sum + item.price, 0);
+                    document.getElementById('selectedAccessories').value = JSON.stringify(selectedAccessories);
+                    document.getElementById('selectedAccessoriesPrice').value = accessoriesTotal;
+                    totalPrice += accessoriesTotal;
+
+                    // 设置总价
+                    document.getElementById('finalTotalPrice').value = totalPrice;
+                    
+                    // 提交表单
+                    document.getElementById('orderForm').submit();
+                }
+                </script>
+            </section>
+
+            <!-- 相关产品 -->
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="main-footer">
+        <div id="contact" class="footer-content">
+            <div class="footer-section company-info">
+                <div class="footer-logo">
+                    <img src="../images/Logo.jpg" alt="TideMaster Marine Technology" class="logo-img" style="max-width: 120px;">
+                    <span class="logo-text">TideMaster Marine Technology</span>
+                </div>
+                <p class="company-desc">
+                    UAE Dubai TideMaster Marine Technology specializes in developing high-quality aluminum yachts and fishing boats for local needs
+                </p>
+                </div>
+
+            <div class="footer-section contact-info">
+                <h3>Contact Us</h3>
+                <p class="phone">400-888-9999</p>
+                <p class="company-id">UAE Company Code: 91000XX</p>
+                <p class="address">Dubai Maritime City, 38-88, Gulf Innovation Center, 3rd Floor, Room 142<br>
+                </div>
+
+            <div class="footer-section connect">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="WeChat">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Weibo">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="social-link" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Snapchat">
+                        <i class="fab fa-snapchat"></i>
+                    </a>
+                    <a href="#" class="social-link" title="X">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+            <div class="copyright">
+                    <p>&copy; 2022-2025 TideMaster Marine Technology. All rights reserved.</p>
+                    <ul class="legal-links">
+                        <li><a href="#disclaimer">Disclaimer</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TideMaster - Aluminum Boat Manufacturer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    /* 六边形背景图案 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #000000;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0l10.392 6v12L12 24 1.607 18V6z' fill-opacity='0.05' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+        background-size: 14px 14px;
+        opacity: 1;
+    }
+
+    /* 中间向两边的渐变遮罩 */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 40%,
+            rgba(0, 0, 0, 0.8) 80%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+
+    /* 调整主要内容区域的背景 */
+    .main-header,
+    .hero,
+    .boat-ranges,
+    .tech-features,
+    .why-us,
+    .video-showcase,
+    .main-footer {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* 确保深色背景的可读性 */
+    .dark-theme {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    /* 添加渐变遮罩效果 */
+    .section-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.95));
+        z-index: -1;
+    }
+
+    /* 调整内容区域的对比度 */
+    .hero-content,
+    
+    .range-content,
+    .tech-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* 视频容器样式 */
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 比例 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    .video-grid {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .video-showcase {
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .tech-features {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .tech-features h2 {
+        margin-bottom: 2rem;
+    }
+
+    .tech-intro {
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .tech-item {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .tech-item h3 {
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+    }
+
+    .tech-item p {
+        margin-bottom: 2rem;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .feature-list li {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .feature-list li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+    }
+
+    .why-us {
+        text-align: center;
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .why-us h2 {
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+    }
+
+    /* 更新特性网格布局 */
+    .features-grid {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 1400px; /* 增加最大宽度以适应四列 */
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .feature {
+        flex: 1;
+        max-width: 280px; /* 调整每列的最大宽度 */
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .feature h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+
+    .feature p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-gray);
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 1200px) {
+        .features-grid {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature {
+            flex: 0 1 calc(50% - 2rem);
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .features-grid {
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .feature {
+            flex: 1;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    /* 下拉菜单样式 */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .build-btn {
+        cursor: pointer;
+    }
+
+    .build-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 250px;
+        background-color: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-content {
+        padding: 0 1rem;
+    }
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-list li {
+        margin: 0.5rem 0;
+    }
+
+    .menu-list a {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .menu-list a:hover {
+        color: var(--primary-color);
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* 显示下拉菜单 */
+    .dropdown:hover .build-menu {
+        display: block;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .main-header {
+            padding: 0.5rem 0;
+        }
+
+        .main-header .container {
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-list {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1 rem;
+            padding: 0.5rem 0;
+            margin: 0;
+            font-size: 0.7rem;
+        }
+
+        .nav-list li:last-child {
+            display: none;
+        }
+
+        .nav-list a {
+            white-space: nowrap;
+            padding: 0 2px;
+        }
+
+        .header-actions {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .build-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .hero {
+            min-height: auto;
+            padding: 12rem 1rem 2rem;
+            background-color: var(--dark-bg);
+        }
+
+        .hero-content {
+            padding: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin: 0.3rem 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-text {
+            font-size: 1rem;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .hero-text p {
+            margin: 0;
+        }
+    }
+
+    /* 平板设备断点优化 */
+    @media (max-width: 1024px) and (min-width: 769px) {
+        .nav-list {
+            gap: 1.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+    }
+
+    /* 下拉菜单基础样式 */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(0, 0, 0, 0.95);
+        min-width: 200px;
+        padding: 0.5rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+    }
+
+    /* BUILD YOUR BOAT 按钮的下拉菜单位置调整 */
+    .header-actions .dropdown-menu {
+        right: 0;
+        left: auto;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .header-actions .dropdown-menu a {
+        color: #FFFFFF;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .header-actions .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e31837;
+    }
+
+    /* 显示下拉菜单 */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .dropdown-menu {
+            position: static;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .header-actions .dropdown-menu {
+            text-align: center;
+        }
+    }
+
+    /* 更新英雄栏背景图样式 */
+    .hero-background {
+        position: relative;
+        width: 100%;
+        height: 85%;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* 移动端优化 */
+    @media (max-width: 768px) {
+        .hero-background {
+            display: none;
+        }
+
+        .hero {
+            min-height: auto;
+            padding: 12rem 1rem 2rem;
+            background-color: var(--dark-bg);
+        }
+
+        .hero-content {
+            padding: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin: 0.3rem 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-text {
+            font-size: 1rem;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .hero-text p {
+            margin: 0;
+        }
+    }
+
+    /* 更新链接样式 */
+    .boat-card a {
+        text-decoration: none;
+        color: var(--text-light);
+    }
+
+    .boat-info h2 {
+        color: var(--text-light);
+        text-decoration: none;
+        margin-bottom: 1rem;
+    }
+
+    .boat-info p {
+        color: var(--text-gray);
+        text-decoration: none;
+    }
+
+    /* 更新标题样式 */
+    .section-title {
+        color: var(--text-light);
+        text-decoration: none;
+    }
+
+    /* 确保所有链接没有下划线 */
+    a {
+        text-decoration: none;
+    }
+
+    /* 更新导航链接样式 */
+    .nav-list a {
+        color: var(--text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-list a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 更新下拉菜单链接样式 */
+    .dropdown-menu a {
+        color: var(--text-light);
+        text-decoration: none;
+        display: block;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--primary-color);
+    }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- 顶部导航 -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+            </a>
+
+            <!-- 主导航 -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="dropdown">
+                        <a href="#">TIDEMASTER</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                            <li><a href="products/TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="ai-integration.html">AI INTEGRATION</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <!-- 右侧操作区 -->
+            <div class="header-actions">
+                <div class="dropdown">
+                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
+                        <li><a href="products/TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
+                        <li><a href="products/TideMaster Lounge.html">TIDEMASTER LOUNGE 38</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    
+    <!-- 产品详情 -->
+<main class="product-detail">
+  
+<!-- AI功能展示部分 -->
+<section class="ai-features">
+    <h2></h2>
+    <h2></h2>
+    <h2>AI INTEGRATION FEATURES</h2>
+    <div class="ai-grid">
+        <!-- 功能特性 - 放在最上方并占据整行 -->
+        <div class="ai-item full-width">
+            <div class="full-width-image">
+                <img src="images\5-1.webp" alt="AI Features">
+            </div>
+            <h3 class="feature-title">Integrated smart features</h3>
+            <p>• Autonomous Course Keeping: Intelligently maintains preset routes.<br>
+               • Autonomous Route Tracking: Tracks planned routes in real-time.<br>
+               • Collision Avoidance: Automatically identifies and avoids obstacles.<br>
+               • Dynamic Positioning: Dynamic positioning functionality.<br>
+               • Automated Docking and Undocking: Intelligent assistance for docking and undocking operations. </p>
+        </div>
+
+        <!-- 硬件设备 -->
+        <div class="ai-item">
+            <img src="images\3-4.webp" alt="Display and Interaction Terminal">
+            <h3 class="feature-title">Comprehensive situational awareness</h3>
+            <p>Utilizes semi-autonomous driving technology, provides comprehensive navigation assistance, ensuring safer and more relaxed voyages.</p>
+        </div>
+
+        <div class="ai-item">
+            <img src="images\3-3.webp" alt="High-Performance Lidar">
+            <h3 class="feature-title">Autonomous Navigation Controller</h3>
+            <p> Intelligent control unit, actively controls the vessel, offering a sailing experience that surpasses manual operation, making navigation more efficient and worry-free.</p>
+        </div>
+
+        <div class="ai-item">
+            <img src="images\3-1.webp" alt="Autonomous Navigation Controller">
+            <h3 class="feature-title">Advanced MFD</h3>
+            <p> Integrates multi-source data，provides real-time navigation data, system status, and intuitive control of smart features, enhancing situational awareness. </p>
+        </div>
+
+        <div class="ai-item">
+            <img src="images\3-2.webp" alt="Autonomous Navigation Controller">
+            <h3 class="feature-title">4D Millimeter Wave Radar</h3>
+            <p>High-resolution detection, offers precise detection of objects and vessels in various weather conditions, ensuring safe navigation in low visibility. </p>
+        </div>
+
+        <div class="ai-item">
+            <img src="images\Hesai-Fully-solid-state-lidar-2.jpg" alt="4D Millimeter-Wave Radar">
+            <h3 class="feature-title">High-Performance LiDAR</h3>
+            <p>Advanced laser scanning technology, delivers accurate 3D environmental mapping, enabling precise obstacle detection and enhanced navigation safety.</p>
+        </div>
+
+        <div class="ai-item">
+            <img src="images\maxresdefault.jpg" alt="Marine Camera">
+            <h3 class="feature-title">Marine infrared Camera</h3>
+            <p>Advanced marine infrared camera with AI object recognition and tracking, enhancing visibility and safety during navigation.</p>
+        </div>
+    </div>
+</section>
+        </main> 
+
+        <!-- 更新样式 -->
+        <style>
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ai-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .ai-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .ai-item h3,
+        .ai-item .feature-title {
+            padding: 1.5rem 1.5rem 1rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .ai-item p {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .ai-item.full-width {
+            grid-column: 1 / -1;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .full-width-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .full-width-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            max-height: 400px;
+        }
+
+        .ai-item.full-width .feature-title {
+            padding: 1.5rem 1.5rem 1rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .ai-item.full-width p {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .ai-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width-image {
+                max-height: 300px;
+            }
+
+            .full-width-image img {
+                max-height: 300px;
+            }
+        }
+        </style>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+    <!-- 页脚 -->
+    <footer class="main-footer">
+        <div id="contact" class="footer-content">
+            <div class="footer-section company-info">
+                <div class="footer-logo">
+                    <img src="images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+                </div>
+                <p class="company-desc">
+                    TideMaster is dedicated to seizing the growing demand for aluminum fishing boats in the UAE, through targeted research and development of high-quality aluminum boats suitable for local conditions.
+                </p>
+            </div>
+
+            <div class="footer-section contact-info">
+                <h3>Contact Information</h3>
+                <p class="phone">+971 561018837</p>
+                <p class="company-id">UAE Company Code: 64998</p>
+                <p class="address">Dubai Maritime City, 38-88, Gulf Innovation Center, 11th Floor<br>Dubai, UAE</p>
+            </div>
+            
+
+            <div class="footer-section connect">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="WeChat">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Weibo">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="social-link" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Snapchat">
+                        <i class="fab fa-snapchat"></i>
+                    </a>
+                    <a href="#" class="social-link" title="X">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#options">Options</a></li>
+                    <li><a href="#trailers">Trailers</a></li>
+                    <li><a href="#gear">Equipment</a></li>
+                    <li><a href="#warranty">Warranty Policy</a></li>
+                    <li><a href="#dealer-portal">Dealer Portal</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright">
+                    <p>&copy; 2022-2025 TideMaster Marine Technology. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+    :root {
+        --primary-color: #e31837;
+        --dark-bg: #111111;
+        --text-light: #ffffff;
+        --text-gray: #888888;
+    }
+
+    body.dark-theme {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-header {
+        background-color: rgba(17, 17, 17, 0.95);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 0;
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-list a {
+        color: var(--text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 2rem;
+    }
+
+    .hero h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+    }
+
+    .range-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 4rem 2rem;
+    }
+
+    .range-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        aspect-ratio: 16/9;
+    }
+
+    .range-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .range-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        color: var(--text-light);
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+    }
+
+    .btn-outline {
+        border: 2px solid var(--text-light);
+        color: var(--text-light);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    /* 页脚样式 */
+    .main-footer {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        padding: 4rem 0 0;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    .footer-logo {
+        margin-bottom: 1.5rem;
+    }
+
+    .logo-img {
+        max-width: 200px;
+        margin-bottom: 0.5rem;
+    }
+
+    .logo-text {
+        display: block;
+        font-size: 0.875rem;
+        color: var(--text-gray);
+    }
+
+    .company-desc {
+        color: var(--text-gray);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+    }
+
+    .contact-info p {
+        margin-bottom: 0.5rem;
+        color: var(--text-gray);
+    }
+
+    .phone {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-light) !important;
+    }
+
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        color: white;
+        text-decoration: none;
+    }
+
+    .social-link i {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-link:hover i {
+        transform: scale(1.1);
+    }
+
+    /* 为不同的社交媒体设置悬停颜色 */
+    .social-link[title="WeChat"]:hover {
+        background: #07C160;
+    }
+
+    .social-link[title="Weibo"]:hover {
+        background: #E6162D;
+    }
+
+    .social-link[title="TikTok"]:hover {
+        background: #000000;
+    }
+
+    .social-link[title="Instagram"]:hover {
+        background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    }
+
+    .social-link[title="Snapchat"]:hover {
+        background: #FFFC00;
+        color: #000;
+    }
+
+    .social-link[title="X"]:hover {
+        background: #000000;
+    }
+
+    .social-link[title="Facebook"]:hover {
+        background: #1877F2;
+    }
+
+    .social-link[title="YouTube"]:hover {
+        background: #FF0000;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .social-links {
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .social-link i {
+            font-size: 18px;
+        }
+    }
+
+    .quick-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .quick-links li {
+        margin-bottom: 0.75rem;
+    }
+
+    .quick-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .quick-links a:hover {
+        color: var(--text-light);
+    }
+
+    .footer-bottom {
+        margin-top: 4rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .copyright {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .legal-links {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .legal-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.3s;
+    }
+
+    .legal-links a:hover {
+        color: var(--text-light);
+    }
+
+    .credits {
+        color: var(--text-gray);
+        font-size: 0.875rem;
+    }
+
+    .credits a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .credits a:hover {
+        color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-bottom .container {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .copyright {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+    </style>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

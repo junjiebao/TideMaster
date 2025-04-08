@@ -1,0 +1,1601 @@
+/* 全局样式 */
+:root {
+    --primary-color: #0077b6;
+    --secondary-color: #00b4d8;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --white: #fff;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--secondary-color);
+}
+
+/* 导航栏 */
+.main-header {
+    background-color: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* 轮播图 */
+.hero-slider {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--white);
+}
+
+.slide-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* 产品中心 */
+.product-categories {
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.75rem;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.category-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.category-info {
+    padding: 20px;
+}
+
+.category-info h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.category-info p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+    }
+
+    nav ul {
+        margin-top: 15px;
+    }
+
+    .hero-slider {
+        height: 300px;
+    }
+
+    .slide-content h2 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    .main-nav .nav-link {
+        font-size: 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .category-info h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* 导航菜单样式 */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main-nav .nav-list {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav .nav-item {
+    position: relative;
+}
+
+.main-nav .nav-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+/* 下拉箭头 */
+.nav-link.has-dropdown::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    margin-left: 8px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+/* 悬停效果 */
+.nav-link:hover {
+    color: #e31837;
+}
+
+.nav-link.has-dropdown:hover::after {
+    transform: rotate(-135deg);
+}
+
+/* 右侧操作区域 */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 下拉菜单样式 */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu,
+.build-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.build-menu {
+    right: 0;
+    left: auto;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:hover .build-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-content {
+    padding: 0.5rem 0;
+}
+
+.dropdown-list,
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-list a,
+.menu-list a {
+    display: block;
+    padding: 0.875rem 1.75rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 1.0625rem;
+    font-weight: 500;
+}
+
+.dropdown-list a:hover,
+.menu-list a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e31837;
+}
+
+/* BUILD YOUR BOAT 按钮 */
+.btn-build {
+    background-color: #e31837;
+    color: #FFFFFF;
+    padding: 0.875rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-build:hover {
+    background-color: #c41230;
+}
+
+/* 下拉箭头标识 */
+.dropdown > a::after,
+.nav-item.dropdown > a::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    margin-left: 8px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+    vertical-align: 2px;
+}
+
+/* 悬停时箭头旋转 */
+.dropdown:hover > a::after,
+.nav-item.dropdown:hover > a::after {
+    transform: rotate(-135deg);
+    margin-top: 3px;
+}
+
+/* 调整 BUILD YOUR BOAT 按钮的箭头位置 */
+.btn-build::after {
+    margin-left: 10px;
+    vertical-align: 1px;
+}
+
+/* 船卡片中的 LEARN MORE 链接样式 */
+.boat-info a {
+    display: inline-block;
+    color: #e31837; /* 使用品牌红色 */
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-decoration: none;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-right: 24px;
+    transition: all 0.3s ease;
+}
+
+/* 添加箭头图标 */
+.boat-info a::after {
+    content: '→';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+/* 悬停效果 */
+.boat-info a:hover {
+    color: #ff1f41 !important; /* 更亮的红色，添加 !important 确保覆盖其他样式 */
+    text-decoration: none;
+}
+
+.boat-info a:hover::after {
+    transform: translate(5px, -50%);
+}
+
+/* 导航和电子设备表格样式 */
+.nav-electronics-table {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 180px repeat(6, 1fr);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 180px repeat(6, 1fr);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 80px;
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.row-header {
+    padding: 1rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.02);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.col-package {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 调整表头中单选框的样式 */
+.col-package .radio-label {
+    margin-top: 0.5rem;
+}
+
+.col-package .radio-label input[type="radio"] {
+    width: 18px;
+    height: 18px;
+}
+
+.col-package .radio-label input[type="radio"]:checked::after {
+    width: 8px;
+    height: 8px;
+}
+
+.package-content {
+    padding: 1rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.package-content:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.package-content:last-child,
+.col-package:last-child {
+    border-right: none;
+}
+
+.empty-cell {
+    background: rgba(255, 255, 255, 0.02);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 单选框样式 */
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+}
+
+.radio-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.radio-label input[type="radio"]:checked {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+}
+
+.radio-label input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+}
+
+.radio-label:hover input[type="radio"] {
+    border-color: var(--primary-color);
+}
+
+.radio-label span {
+    flex: 1;
+    text-align: center;
+}
+
+/* 多行文本的单元格样式 */
+.package-content.multiline {
+    line-height: 1.4;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 统一的标题样式 */
+.specifications h2,
+.configurations h2,
+.optional-accessories h2 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 3rem 0 2rem;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+/* 可以添加一个装饰性的下划线 */
+.specifications h2::after,
+.configurations h2::after,
+.optional-accessories h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+/* 配置组标题样式 */
+.config-group h3 {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 2rem 0 1.5rem;
+    padding-bottom: 0.75rem;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 添加装饰性下划线 */
+.config-group h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+/* 确保配置组内容对齐 */
+.config-group {
+    text-align: left; /* 保持选项内容左对齐 */
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+}
+
+/* 配置网格布局优化 */
+.config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 增加最小宽度 */
+    gap: 2rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* 配置组样式优化 */
+.config-group {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* 配置选项样式优化 */
+.configurations .config-option {
+    margin-bottom: 1.25rem;
+}
+
+.configurations .config-option label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    cursor: pointer;
+    padding: 1.25rem; /* 增加内边距 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.config-option label:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 复选框样式 */
+.config-option input[type="checkbox"] {
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px; /* 改为正方形 */
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-top: 4px; /* 微调对齐 */
+}
+
+.config-option input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.config-option input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+}
+
+/* 选项标题和价格样式 */
+.option-title {
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    letter-spacing: 0.3px;
+    padding-right: 1rem;
+}
+
+.option-price {
+    font-weight: 500;
+    color: var(--text-gray);
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+
+/* 标题和描述容器样式优化 */
+.configurations .option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* 增加标题和描述之间的间距 */
+}
+
+/* 标题样式优化 */
+.configurations .option-title {
+    font-size: 1.1rem; /* 增大标题字体 */
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+}
+
+/* 描述文本样式优化 */
+.configurations .option-description {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+    margin-top: 0.25rem;
+}
+
+/* 价格标签样式 */
+.option-price {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    font-weight: 500;
+    margin-left: 1rem;
+    margin-top: 4px; /* 与复选框对齐 */
+}
+
+/* 标准配置选项样式调整 */
+.configurations .config-option label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.configurations .option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-right: 1rem; /* 移除价格后增加右侧内边距 */
+}
+
+/* 其他可选配件部分保持价格显示 */
+.optional-accessories .config-option label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.optional-accessories .option-price {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    font-weight: 500;
+    margin-left: 1rem;
+    margin-top: 4px;
+}
+
+/* 复选框样式优化 */
+.configurations .config-option input[type="checkbox"] {
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 0.25rem; /* 微调复选框位置 */
+}
+
+/* STANDARD CONFIGURATIONS 选项卡片样式 */
+.configurations .config-option label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    cursor: pointer;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.configurations .config-option label:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 复选框样式优化 */
+.configurations .config-option input[type="checkbox"] {
+    min-width: 22px;
+    width: 22px;
+    height: 22px;
+    margin-top: 4px;
+    background: rgba(227, 24, 55, 0.1);
+    border: 2px solid rgba(227, 24, 55, 0.5);
+    border-radius: 4px;
+}
+
+.configurations .config-option input[type="checkbox"]:checked {
+    background-color: rgb(227, 24, 55);
+    border-color: rgb(227, 24, 55);
+}
+
+/* 内容容器样式 */
+.configurations .option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* 标题样式 */
+.configurations .option-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+}
+
+/* 描述文本样式 */
+.configurations .option-description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+}
+
+/* 配置网格布局优化 */
+.configurations .config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* 配置组样式优化 */
+.configurations .config-group {
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* ENGINE OPTIONS 单选框样式 */
+.configurations .config-radio {
+    min-width: 22px;
+    width: 22px;
+    height: 22px;
+    margin-top: 4px;
+    background: rgba(227, 24, 55, 0.1);
+    border: 2px solid rgba(227, 24, 55, 0.5);
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.configurations .config-radio:checked {
+    background-color: rgb(227, 24, 55);
+    border-color: rgb(227, 24, 55);
+}
+
+.configurations .config-radio:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* 确保引擎选项的布局与其他部分一致 */
+.configurations .config-option label {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    cursor: pointer;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* 价格计算器样式 */
+.price-calculator {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.price-breakdown {
+    margin-bottom: 2rem;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-item:last-child {
+    border-bottom: none;
+}
+
+.price-item.total {
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.price-label {
+    color: var(--text-gray);
+}
+
+.total .price-label,
+.total .total-price {
+    color: var(--text-light);
+}
+
+/* 价格更新动画 */
+@keyframes priceUpdate {
+    0% {
+        transform: scale(1);
+        color: var(--text-light);
+    }
+    50% {
+        transform: scale(1.1);
+        color: var(--primary-color);
+    }
+    100% {
+        transform: scale(1);
+        color: var(--text-light);
+    }
+}
+
+.price-update {
+    animation: priceUpdate 0.3s ease;
+}
+
+/* 价格显示样式优化 */
+.price-item span:last-child {
+    font-family: 'Roboto Mono', monospace;
+    transition: color 0.3s ease;
+}
+
+.price-item.total span:last-child {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* 发动机选项价格样式 */
+.configurations .config-option .option-price {
+    white-space: nowrap;
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    font-weight: 500;
+    min-width: 100px;
+    text-align: right;
+}
+
+/* 导航电子设备套餐价格样式 */
+.col-package .package-price {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* 选中状态下的价格高亮 */
+.configurations .config-option input:checked ~ .option-price,
+.col-package input:checked ~ .package-price {
+    color: var(--primary-color);
+}
+
+/* 可选配件两列布局 */
+.optional-accessories .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 两列等宽布局 */
+    gap: 2rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.optional-accessories .config-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 保持现有的组样式 */
+.optional-accessories .config-group {
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    height: 100%; /* 确保同一行的组高度一致 */
+}
+
+/* 响应式布局 */
+@media (max-width: 992px) {
+    .optional-accessories .config-grid {
+        grid-template-columns: 1fr;  /* 在较小屏幕上切换为单列 */
+    }
+}
+
+/* Order Confirmation Popup Styles */
+.confirmation-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.confirmation-dialog-overlay.visible {
+    opacity: 1;
+}
+
+.confirmation-dialog {
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    opacity: 0;
+}
+
+.confirmation-dialog.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dialog-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--primary-color);
+}
+
+.dialog-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.summary-section {
+    margin-bottom: 1.5rem;
+}
+
+.summary-section h3 {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-list,
+.accessories-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.config-item,
+.accessory-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    color: var(--text-light);
+}
+
+.check-icon,
+.engine-icon,
+.nav-icon,
+.accessory-icon {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.selection-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Submit Order 页面样式 */
+.page-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    margin-bottom: 3rem;
+}
+
+.order-summary {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.order-summary h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.order-summary h3 {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.config-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.section-content {
+    color: var(--text-light);
+    text-align: center;
+}
+
+/* 价格摘要样式优化 */
+.price-summary {
+    width: 320px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    height: fit-content;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.3rem;
+}
+
+.price-item span:first-child {
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.price-item span:last-child {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--text-light);
+    text-align: right;
+    min-width: 140px;
+    font-size: 1.4rem;
+}
+
+.price-item.total {
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+}
+
+.price-item.total span:first-child {
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.price-item.total span:last-child {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* 联系表单样式 */
+.contact-form {
+    margin-top: 3rem;
+}
+
+.contact-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-gray);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: var(--text-light);
+}
+
+.form-actions {
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.summary-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-summary {
+        margin-left: 0;
+        margin-top: 2rem;
+    }
+}
+
+/* 订单摘要文本框样式 */
+.summary-text-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    flex: 1;
+}
+
+.text-content {
+    color: var(--text-light);
+    text-align: center;
+}
+
+.text-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.text-content h3 {
+    font-size: 1.8rem;
+    color: var(--text-gray);
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-section {
+    margin-bottom: 2rem;
+}
+
+.summary-section h4 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.section-content {
+    color: var(--text-gray);
+    line-height: 1.8;
+    padding: 0.8rem 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* 保持价格摘要的现有样式 */
+.price-summary {
+    width: 320px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    height: fit-content;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-summary {
+        width: 100%;
+        margin-top: 2rem;
+    }
+}
+
+/* 订单页面通用样式 */
+.order-section {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    font-weight: 600;
+}
+
+/* 配置摘要样式 */
+.summary-box {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.summary-group {
+    margin-bottom: 2.5rem;
+}
+
+.summary-group:last-child {
+    margin-bottom: 0;
+}
+
+.summary-group h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-list {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* 价格摘要样式 */
+.price-box {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.3rem;
+}
+
+.price-item span:first-child {
+    color: var(--text-gray);
+}
+
+.price-item span:last-child {
+    color: var(--text-light);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.4rem;
+}
+
+.price-item.total {
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+}
+
+.price-item.total span {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* 联系表单样式 */
+.contact-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-gray);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 4rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #ff1f41;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .order-section {
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+}

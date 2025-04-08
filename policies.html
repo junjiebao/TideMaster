@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TideMaster - Aluminum Boat Manufacturer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+    /* 六边形背景图案 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #000000;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0l10.392 6v12L12 24 1.607 18V6z' fill-opacity='0.05' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+        background-size: 14px 14px;
+        opacity: 1;
+    }
+
+    /* 中间向两边的渐变遮罩 */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 40%,
+            rgba(0, 0, 0, 0.8) 80%,
+            rgba(0, 0, 0, 1) 100%
+        );
+    }
+
+    /* 调整主要内容区域的背景 */
+    .main-header,
+    .hero,
+    .boat-ranges,
+    .tech-features,
+    .why-us,
+    .video-showcase,
+    .main-footer {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* 确保深色背景的可读性 */
+    .dark-theme {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    /* 添加渐变遮罩效果 */
+    .section-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.95));
+        z-index: -1;
+    }
+
+    /* 调整内容区域的对比度 */
+    .hero-content,
+    
+    .range-content,
+    .tech-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* 视频容器样式 */
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 比例 */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    .video-grid {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .video-showcase {
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .tech-features {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .tech-features h2 {
+        margin-bottom: 2rem;
+    }
+
+    .tech-intro {
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .tech-item {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .tech-item h3 {
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+    }
+
+    .tech-item p {
+        margin-bottom: 2rem;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .feature-list li {
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .feature-list li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+    }
+
+    .why-us {
+        text-align: center;
+        padding: 4rem 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .why-us h2 {
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+    }
+
+    /* 更新特性网格布局 */
+    .features-grid {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 1400px; /* 增加最大宽度以适应四列 */
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .feature {
+        flex: 1;
+        max-width: 280px; /* 调整每列的最大宽度 */
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .feature h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+    }
+
+    .feature p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-gray);
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 1200px) {
+        .features-grid {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature {
+            flex: 0 1 calc(50% - 2rem);
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .features-grid {
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .feature {
+            flex: 1;
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    /* 下拉菜单样式 */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .build-btn {
+        cursor: pointer;
+    }
+
+    .build-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 250px;
+        background-color: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-content {
+        padding: 0 1rem;
+    }
+
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-list li {
+        margin: 0.5rem 0;
+    }
+
+    .menu-list a {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .menu-list a:hover {
+        color: var(--primary-color);
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* 显示下拉菜单 */
+    .dropdown:hover .build-menu {
+        display: block;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .main-header {
+            padding: 0.5rem 0;
+        }
+
+        .main-header .container {
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-list {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1 rem;
+            padding: 0.5rem 0;
+            margin: 0;
+            font-size: 0.7rem;
+        }
+
+        .nav-list li:last-child {
+            display: none;
+        }
+
+        .nav-list a {
+            white-space: nowrap;
+            padding: 0 2px;
+        }
+
+        .header-actions {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .build-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .hero {
+            min-height: auto;
+            padding: 12rem 1rem 2rem;
+            background-color: var(--dark-bg);
+        }
+
+        .hero-content {
+            padding: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin: 0.3rem 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-text {
+            font-size: 1rem;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .hero-text p {
+            margin: 0;
+        }
+    }
+
+    /* 平板设备断点优化 */
+    @media (max-width: 1024px) and (min-width: 769px) {
+        .nav-list {
+            gap: 1.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+    }
+
+    /* 下拉菜单基础样式 */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: rgba(0, 0, 0, 0.95);
+        min-width: 200px;
+        padding: 0.5rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+    }
+
+    /* BUILD YOUR BOAT 按钮的下拉菜单位置调整 */
+    .header-actions .dropdown-menu {
+        right: 0;
+        left: auto;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .header-actions .dropdown-menu a {
+        color: #FFFFFF;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .header-actions .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e31837;
+    }
+
+    /* 显示下拉菜单 */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .dropdown-menu {
+            position: static;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .header-actions .dropdown-menu {
+            text-align: center;
+        }
+    }
+
+    /* 更新英雄栏背景图样式 */
+    .hero-background {
+        position: relative;
+        width: 100%;
+        height: 85%;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    /* 移动端优化 */
+    @media (max-width: 768px) {
+        .hero-background {
+            display: none;
+        }
+
+        .hero {
+            min-height: auto;
+            padding: 12rem 1rem 2rem;
+            background-color: var(--dark-bg);
+        }
+
+        .hero-content {
+            padding: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin: 0.3rem 0;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-text {
+            font-size: 1rem;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .hero-text p {
+            margin: 0;
+        }
+    }
+
+    /* 更新链接样式 */
+    .boat-card a {
+        text-decoration: none;
+        color: var(--text-light);
+    }
+
+    .boat-info h2 {
+        color: var(--text-light);
+        text-decoration: none;
+        margin-bottom: 1rem;
+    }
+
+    .boat-info p {
+        color: var(--text-gray);
+        text-decoration: none;
+    }
+
+    /* 更新标题样式 */
+    .section-title {
+        color: var(--text-light);
+        text-decoration: none;
+    }
+
+    /* 确保所有链接没有下划线 */
+    a {
+        text-decoration: none;
+    }
+
+    /* 更新导航链接样式 */
+    .nav-list a {
+        color: var(--text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-list a:hover {
+        color: var(--primary-color);
+    }
+
+    /* 更新下拉菜单链接样式 */
+    .dropdown-menu a {
+        color: var(--text-light);
+        text-decoration: none;
+        display: block;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--primary-color);
+    }
+
+    /* 政策页面特定样式 */
+    .policy-section {
+        padding-top: 120px;
+        padding-bottom: 60px;
+        background-color: var(--dark-bg);
+        min-height: calc(100vh - 120px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .policy-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;  /* 改为单列 */
+        gap: 2rem;
+    }
+
+    .policy-module {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 2.5rem;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        max-width: 1000px;  /* 设置最大宽度 */
+        margin: 0 auto;  /* 水平居中 */
+    }
+
+    .policy-module:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .policy-module h2 {
+        color: var(--text-light);
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--primary-color);
+        text-align: left;
+        position: relative;
+    }
+
+    .policy-module h2::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--primary-color);
+    }
+
+    .policy-module p {
+        color: var(--text-gray);
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+    }
+
+    .policy-module ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .policy-module li {
+        color: var(--text-gray);
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        position: relative;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .policy-module li::before {
+        content: "•";
+        color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        font-size: 1.2rem;
+    }
+
+    /* 移除平板端适配，因为现在始终是单列 */
+    @media (max-width: 1024px) {
+        .policy-container {
+            padding: 1.5rem;
+        }
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .policy-section {
+            padding-top: 100px;
+            padding-bottom: 40px;
+        }
+
+        .policy-container {
+            padding: 1rem;
+        }
+
+        .policy-module {
+            padding: 1.5rem;
+        }
+
+        .policy-module h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .policy-module p {
+            font-size: 0.95rem;
+        }
+
+        .policy-module li {
+            font-size: 0.9rem;
+        }
+    }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- 顶部导航 -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+            </a>
+
+            <!-- 主导航 -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="dropdown">
+                        <a href="#">TIDEMASTER</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                            <li><a href="products/TideMaster Hunter.html">TIDEMASTER HUNTER</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="ai-integration.html">AI INTEGRATION</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+
+            <!-- 右侧操作区 -->
+            <div class="header-actions">
+                <div class="dropdown">
+                    <button class="btn btn-primary build-btn">BUILD YOUR BOAT</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT 38</a></li>
+                        <li><a href="products/TideMaster Hunter.html">TIDEMASTER HUNTER 28</a></li>
+                        <li><a href="products/TideMaster Lounge.html">TIDEMASTER LOUNGE 38</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- 政策内容 -->
+    <section class="policy-section">
+        <div class="policy-container">
+            <!-- 免责声明 -->
+            <div class="policy-module">
+                <h2>Disclaimer</h2>
+                <p>Thank you for visiting www.tidemaster.ae ("Website"). This Website is operated by TideMaster Marine Technology ("We", "Us", or "Our"). You acknowledge that by accessing and using this Website, including any information, reports or other related materials regarding our TideMaster® boats ("Products") that You may obtain through the Website, You agree to be bound by the provisions of these terms and conditions ("Terms and Conditions") dealing with Your use of the Website.</p>
+
+                <h3>1. Website Content and Security</h3>
+                <p>1.1 Our Website provides You with information regarding Our Products, including how you can find a dealer to purchase Our Products. We also provide services to You in order to book a test drive of Our Products, Get a Quote for Our Products and register the warranty for Your Products. We will use Our best endeavours to make sure all information on the Website is accurate and up to date.</p>
+                
+                <p>1.2 All Quotes provided through the Website facility are valid for a one month period or the date as stated in the Quote emailed to You, whichever is the latter. All Quotes are including Value Added Tax (VAT) as per UAE regulations.</p>
+
+                <p>1.3 Our TideMaster® Warranty terms are detailed in our Warranty Policy section. Nothing in this Warranty purports to modify or exclude the conditions, warranties and undertakings, and other legal rights, under the UAE Consumer Protection Law and other applicable laws.</p>
+
+                <p>1.4 By subscribing to Our newsletter, you agree to receive email communications from Us about the Products and other advertising and promotional materials We believe may interest You. Please refer to Our Privacy Policy for further conditions relating to Your personal information.</p>
+
+                <p>1.5 You must use the Website responsibly, lawfully and in good faith. You must refrain from any acts or omissions which are misleading or unlawful, including but not limited to:</p>
+                <ul>
+                    <li>Attempting to probe, scan, or test the vulnerability of any system or network;</li>
+                    <li>Tampering, hacking, or breaching security measures without authorization;</li>
+                    <li>Transmitting harmful material such as viruses or malicious code.</li>
+                </ul>
+
+                <h3>2. Intellectual Property</h3>
+                <p>2.1 All copyright, trade marks and other intellectual property rights in the Website and Products are and will remain Our sole property. TIDEMASTER® is our registered trade mark in the UAE.</p>
+
+                <p>2.2 You may not remove Our trade marks, copyright symbols, or any other intellectual property identifiers from the Website or any materials.</p>
+
+                <h3>3. Third-Party Links</h3>
+                <p>3.1 Links to third-party websites are provided for convenience only. We do not endorse these websites and are not responsible for their content or practices.</p>
+
+                <p>3.2 Any party linking to Our Website must ensure:</p>
+                <ul>
+                    <li>No implied endorsement without written agreement;</li>
+                    <li>No misrepresentation of relationship with Us;</li>
+                    <li>No offensive or controversial content on the linking site.</li>
+                </ul>
+
+                <h3>4. Warranties and Liability</h3>
+                <p>4.1 To the extent permitted by UAE law, the Website is provided "as is" without warranties of any kind. We do not guarantee uninterrupted service or error-free content.</p>
+
+                <p>4.2 You agree to indemnify Us against all actions, claims, and expenses arising from Your use of the Website, subject to UAE law.</p>
+
+                <h3>5. Governing Law</h3>
+                <p>5.1 These Terms and Conditions are governed by the laws of the United Arab Emirates. Any disputes shall be subject to the exclusive jurisdiction of the Dubai Courts.</p>
+
+                <h3>6. Updates</h3>
+                <p>6.1 We may update these Terms and Conditions at any time. Continued use of the Website following any changes constitutes acceptance of the updated terms.</p>
+            </div>
+
+            <!-- 隐私政策 -->
+            <div class="policy-module">
+                <h2>Privacy Policy</h2>
+                <h3>Collection of Information</h3>
+                <p>We gather certain information about users of this website, https://www.tidemaster.ae (Website). This information includes:</p>
+                <ul>
+                    <li>Personal information, provided through voluntary subscription to Our newsletter;</li>
+                    <li>Personal information, provided to Us by You through any other method (including without limitation correspondence and discussions);</li>
+                    <li>Personal information, provided to Us by You in connection with surveys, contests or promotions;</li>
+                    <li>Information collected by Us through click-tracking in relation to Your use of the Website, including the content You upload and the content You access;</li>
+                    <li>Aggregated data, which tracks traffic to the Website;</li>
+                    <li>Cookies, which are pieces of information transferred to Your computer hard drive for record keeping (such as Your preferences on Our Website).</li>
+                </ul>
+                <p>Failure to provide necessary personal information when requested may result in certain functions of the Website not being available to You.</p>
+                <p>You confirm that any personal information You provide is current, complete and accurate at the time you provide it, and You agree to maintain and update this information as required to keep it so.</p>
+
+                <h3>Minor Protection</h3>
+                <p>We do not sell or market products to Minors. A "Minor" means any individual under 21 years of age, as defined under UAE Federal Law. We do not knowingly collect personal information from any Minor, and will not deliberately use such information. If you are under 21, you may use the Website only with the involvement of a parent or guardian.</p>
+
+                <h3>Use of Information</h3>
+                <p>Any personal information You provide may be used for the following purposes:</p>
+                <ul>
+                    <li>To assist with the provision of Our products to you and any purchase you may make with us;</li>
+                    <li>To verify Your identity and/or the accuracy of that information;</li>
+                    <li>To send You correspondence to Your nominated email address, including promotional material;</li>
+                    <li>To gain feedback from You to better understand Our customer needs;</li>
+                    <li>To contact You in response to Your inquiries or quote requests;</li>
+                    <li>For our accounting purposes and processing transactions;</li>
+                    <li>Such other use that You authorise.</li>
+                </ul>
+
+                <h3>Data Protection and Security</h3>
+                <p>In compliance with UAE Federal Decree Law No. 45 of 2021 on Personal Data Protection, we implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including:</p>
+                <ul>
+                    <li>Encryption of personal data during transmission;</li>
+                    <li>Regular testing and evaluation of security measures;</li>
+                    <li>Strict access controls to personal information;</li>
+                    <li>Regular security assessments and updates.</li>
+                </ul>
+
+                <h3>International Transfers</h3>
+                <p>As a UAE-based company, we may transfer your data internationally. Such transfers are conducted in compliance with UAE data protection laws and regulations, ensuring appropriate safeguards are in place.</p>
+
+                <h3>Your Rights</h3>
+                <p>Under UAE law, you have the following rights regarding your personal information:</p>
+                <ul>
+                    <li>Right to access your personal information;</li>
+                    <li>Right to correct inaccurate information;</li>
+                    <li>Right to delete your information;</li>
+                    <li>Right to object to processing;</li>
+                    <li>Right to withdraw consent;</li>
+                    <li>Right to data portability.</li>
+                </ul>
+
+                <h3>Contact Information</h3>
+                <p>Any personal information that You provide to Us will be collected and held by Us at Dubai Maritime City, 38-88, Gulf Innovation Center, 11th Floor, Dubai, UAE. For any privacy-related inquiries, please contact us at info@tidemaster.ae</p>
+
+                <h3>Updates to Privacy Policy</h3>
+                <p>This privacy policy was last updated in January 2025. We reserve the right to update this policy at any time, and any changes will be posted on this page.</p>
+            </div>
+
+            <!-- 保修政策 -->
+            <div class="policy-module">
+                <h2>Warranty Policy</h2>
+                
+                <div class="ceo-message">
+                    <h3>A Message from Our Founder & CEO</h3>
+                    <p>Dear Valued Customer,</p>
+                    <p>At TideMaster Marine Technology, we take immense pride in crafting vessels that embody excellence in marine engineering and innovation. Our commitment to quality is not just a promise—it's a foundation of our business philosophy.</p>
+                    <p>Every TideMaster boat is built with meticulous attention to detail, incorporating advanced technology and premium materials. We stand firmly behind our products with one of the most comprehensive warranty programs in the marine industry.</p>
+                    <p>This warranty policy reflects our confidence in the durability and reliability of our boats, and our dedication to ensuring your complete satisfaction with your TideMaster vessel.</p>
+                    <p>Thank you for choosing TideMaster. We look forward to supporting your maritime adventures for years to come.</p>
+                    <p class="signature">Joey Bao<br>Founder & CEO, TideMaster Marine Technology</p>
+                </div>
+
+                <h3>Warranty Coverage Overview</h3>
+                <ul>
+                    <li>5-years transferable hull structure warranty</li>
+                    <li>3-years warranty on manufacturing defects</li>
+                    <li>2-years warranty on electrical and mechanical components</li>
+                    <li>1-year warranty on electrical and mechanical components from third party suppliers</li>
+                    <li>1-year limited warranty on accessories and equipment from third party suppliers</li>
+                    <li>Lifetime warranty against hull perforation due to corrosion</li>
+                </ul>
+
+                <h3>Warranty Terms and Conditions</h3>
+                <p>1. Hull Structure Warranty</p>
+                <ul>
+                    <li>Covers structural integrity of the hull and deck</li>
+                    <li>Includes protection against defects in materials and workmanship</li>
+                    <li>Transferable to subsequent owners within the 5-year period from date of purchase</li>
+                    <li>Requires annual inspection by authorized dealer</li>
+                </ul>
+
+                <p>2. Manufacturing Defects Warranty</p>
+                <ul>
+                    <li>Covers defects in materials and workmanship</li>
+                    <li>Includes gel coat finish, interior components, and structural elements</li>
+                    <li>Valid for 3 years from date of purchase</li>
+                    <li>Subject to proper maintenance and normal use</li>
+                </ul>
+
+                <p>3. Electrical and Mechanical Components</p>
+                <ul>
+                    <li>Covers factory-installed electrical systems</li>
+                    <li>Includes steering systems, pumps, and mechanical controls</li>
+                    <li>2-year coverage from date of purchase</li>
+                    <li>Regular maintenance required as per owner's manual</li>
+                </ul>
+
+                <p>4. Accessories and Equipment from third party suppliers</p>
+                <ul>
+                    <li>Covers factory-installed accessories and equipment from third party suppliers</li>
+                    <li>Includes electronics, navigation equipment, and comfort features</li>
+                    <li>1-year coverage from date of purchase</li>
+                    <li>Must be properly maintained and operated</li>
+                </ul>
+
+                <p>5. Corrosion Protection</p>
+                <ul>
+                    <li>Lifetime warranty against hull perforation due to corrosion</li>
+                    <li>Requires proper maintenance and anti-corrosion measures</li>
+                    <li>Annual inspection required</li>
+                    <li>Life time Corrosion Protection Coverage applies to original owner only</li>
+                </ul>
+
+                <h3>Warranty Exclusions</h3>
+                <p>This warranty does not cover:</p>
+                <ul>
+                    <li>Normal wear and tear</li>
+                    <li>Damage from misuse or negligence</li>
+                    <li>Unauthorized modifications</li>
+                    <li>Commercial use (see Commercial Use Warranty section)</li>
+                    <li>Damage from accidents or natural disasters</li>
+                    <li>Cosmetic issues that don't affect performance</li>
+                    <li>Damage from improper maintenance or third party repairs/installations</li>
+                </ul>
+
+                <h3>Commercial Use Warranty</h3>
+                <p>For vessels purchased for commercial use (including but not limited to fishing charters and water taxis):</p>
+                <ul>
+                    <li>Limited 6-month warranty period from the date of original retail purchase</li>
+                    <li>Hull structure warranty is reduced from 5 years to 6 months</li>
+                    <li>All other warranty terms and conditions remain applicable except for the duration</li>
+                    <li>Commercial use must be declared at the time of purchase</li>
+                    <li>UAE Consumer Protection Law provisions may not apply to commercial purchases</li>
+                </ul>
+
+                <p>Commercial operators must maintain detailed service and maintenance records. More frequent inspections may be required for commercial vessels due to increased usage.</p>
+
+                <h3>Warranty Claims Process</h3>
+                <p>To make a warranty claim:</p>
+                <ul>
+                    <li>Contact your authorized TideMaster dealer</li>
+                    <li>Provide proof of purchase and maintenance records</li>
+                    <li>Allow inspection of the vessel by authorized personnel</li>
+                    <li>Claims must be made within the applicable warranty period</li>
+                </ul>
+
+                <p>For warranty service or claims, please contact your authorized TideMaster dealer or our customer service department at warranty@tidemaster.ae</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div id="contact" class="footer-content">
+            <div class="footer-section company-info">
+                <div class="footer-logo">
+                    <img src="images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+                </div>
+                <p class="company-desc">
+                    TideMaster is dedicated to seizing the growing demand for aluminum fishing boats in the UAE, through targeted research and development of high-quality aluminum boats suitable for local conditions.
+                </p>
+            </div>
+
+            <div class="footer-section contact-info">
+                <h3>Contact Information</h3>
+                <p class="phone">+971 561018837</p>
+                <p class="company-id">UAE Company Code: 64998</p>
+                <p class="address">Dubai Maritime City, 38-88, Gulf Innovation Center, 11th Floor<br>Dubai, UAE</p>
+            </div>
+            
+
+            <div class="footer-section connect">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="WeChat">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Weibo">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="social-link" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Snapchat">
+                        <i class="fab fa-snapchat"></i>
+                    </a>
+                    <a href="#" class="social-link" title="X">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#options">Options</a></li>
+                    <li><a href="#trailers">Trailers</a></li>
+                    <li><a href="#gear">Equipment</a></li>
+                    <li><a href="#warranty">Warranty Policy</a></li>
+                    <li><a href="#dealer-portal">Dealer Portal</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright">
+                    <p>&copy; 2022-2025 TideMaster Marine Technology. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+    :root {
+        --primary-color: #e31837;
+        --dark-bg: #111111;
+        --text-light: #ffffff;
+        --text-gray: #888888;
+    }
+
+    body.dark-theme {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-header {
+        background-color: rgba(17, 17, 17, 0.95);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 0;
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-list a {
+        color: var(--text-light);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 2rem;
+    }
+
+    .hero h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+    }
+
+    .range-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 4rem 2rem;
+    }
+
+    .range-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        aspect-ratio: 16/9;
+    }
+
+    .range-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .range-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        color: var(--text-light);
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+    }
+
+    .btn-outline {
+        border: 2px solid var(--text-light);
+        color: var(--text-light);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    /* 页脚样式 */
+    .main-footer {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        padding: 4rem 0 0;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    .footer-logo {
+        margin-bottom: 1.5rem;
+    }
+
+    .logo-img {
+        max-width: 200px;
+        margin-bottom: 0.5rem;
+    }
+
+    .logo-text {
+        display: block;
+        font-size: 0.875rem;
+        color: var(--text-gray);
+    }
+
+    .company-desc {
+        color: var(--text-gray);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+    }
+
+    .contact-info p {
+        margin-bottom: 0.5rem;
+        color: var(--text-gray);
+    }
+
+    .phone {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-light) !important;
+    }
+
+    .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        color: white;
+        text-decoration: none;
+    }
+
+    .social-link i {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .social-link:hover i {
+        transform: scale(1.1);
+    }
+
+    /* 为不同的社交媒体设置悬停颜色 */
+    .social-link[title="WeChat"]:hover {
+        background: #07C160;
+    }
+
+    .social-link[title="Weibo"]:hover {
+        background: #E6162D;
+    }
+
+    .social-link[title="TikTok"]:hover {
+        background: #000000;
+    }
+
+    .social-link[title="Instagram"]:hover {
+        background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    }
+
+    .social-link[title="Snapchat"]:hover {
+        background: #FFFC00;
+        color: #000;
+    }
+
+    .social-link[title="X"]:hover {
+        background: #000000;
+    }
+
+    .social-link[title="Facebook"]:hover {
+        background: #1877F2;
+    }
+
+    .social-link[title="YouTube"]:hover {
+        background: #FF0000;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .social-links {
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .social-link i {
+            font-size: 18px;
+        }
+    }
+
+    .quick-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .quick-links li {
+        margin-bottom: 0.75rem;
+    }
+
+    .quick-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .quick-links a:hover {
+        color: var(--text-light);
+    }
+
+    .footer-bottom {
+        margin-top: 4rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .copyright {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .legal-links {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .legal-links a {
+        color: var(--text-gray);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.3s;
+    }
+
+    .legal-links a:hover {
+        color: var(--text-light);
+    }
+
+    .credits {
+        color: var(--text-gray);
+        font-size: 0.875rem;
+    }
+
+    .credits a {
+        color: var(--text-gray);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .credits a:hover {
+        color: var(--text-light);
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-bottom .container {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .copyright {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+    </style>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

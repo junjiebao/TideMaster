@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - TideMaster Marine Technology</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 继承原有的深色主题样式 */
+    :root {
+        --primary-color: #e31837;
+        --text-light: #ffffff;
+        --text-gray: rgba(255, 255, 255, 0.7);
+        --dark-bg: #000000;
+    }
+
+    body {
+        background-color: var(--dark-bg);
+        color: var(--text-light);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* 六边形背景图案 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #000000;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 0l10.392 6v12L12 24 1.607 18V6z' fill-opacity='0.05' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+        background-size: 14px 14px;
+        opacity: 1;
+    }
+
+        .order-summary {
+            max-width: 1200px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .order-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .item-details {
+            margin: 10px 0;
+            color: var(--text-light);
+        }
+
+        .item-price {
+            text-align: right;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .total-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 30px;
+            color: var(--primary-color);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        /* 联系表单样式 */
+        .contact-form {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .form-group input,
+        .form-group textarea {
+        width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: var(--text-light);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #ff1f41;
+        }
+
+        /* 添加联系方式样式 */
+        .company-contact-info {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .contact-item {
+        display: flex;
+        align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .contact-item i {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--primary-color);
+        }
+
+        .whatsapp-button {
+        display: flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+
+        .whatsapp-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .whatsapp {
+            margin-top: 20px;
+        }
+
+        /* WhatsApp 部分的新样式 */
+        .whatsapp-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .whatsapp-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 50%;
+        }
+
+        .whatsapp-section p {
+        color: var(--text-light);
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-button {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+        text-decoration: none;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+    }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+    }
+
+        /* 页脚样式更新 */
+        .main-footer {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 4rem 0 0;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+        .footer-section {
+        color: var(--text-light);
+        }
+
+        .footer-logo {
+        margin-bottom: 1.5rem;
+    }
+
+        .footer-logo img {
+            max-width: 120px;
+            height: auto;
+        }
+
+        .company-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .footer-section h3 {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        transition: color 0.3s ease;
+    }
+
+        .social-link:hover {
+            color: var(--primary-color);
+    }
+
+    .copyright {
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-gray);
+    }
+
+    /* 订单页响应式样式 */
+    @media (max-width: 768px) {
+        .order-summary {
+            margin: 80px 1rem 2rem;
+            padding: 1.5rem;
+        }
+
+        .order-item {
+            padding: 1rem;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+        }
+
+        .item-price {
+            font-size: 1rem;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            padding: 1rem;
+        }
+
+        /* 联系信息适配 */
+        .contact-form {
+            margin: 2rem 1rem;
+            padding: 1.5rem;
+        }
+
+        .whatsapp-section {
+            padding: 1rem;
+        }
+
+        .contact-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item i {
+            margin-right: 0;
+        }
+    }
+
+    .accessory-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .accessory-details {
+        flex: 1;
+        padding-right: 20px;
+    }
+
+    .accessory-price {
+        text-align: right;
+        white-space: nowrap;
+    }
+    </style>
+</head>
+<body>
+    <!-- 更新导航栏部分 -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+            </a>
+
+            <!-- 主导航 -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="products/TideMaster Cat.html">TIDEMASTER CAT</a></li>
+                    <li><a href="index.html#tech-features">WHY TIDEMASTER</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="#contact">BECOME DEALER</a></li>
+                </ul>
+            </nav>
+
+            <!-- 右侧操作区 -->
+            <div class="header-actions">
+                <a href="products/TideMaster Cat.html" class="btn btn-primary build-btn">
+                    BUILD YOUR BOAT
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 订单摘要 -->
+    <div class="order-summary">
+        <h2 class="section-title">Order Summary</h2>
+        
+        <!-- TideMaster Cat 38 订单信息 -->
+        <div id="catOrderSummary" style="display: none;">
+            <div class="order-item">
+                <div class="item-title">Base Price for TIDEMASTER CAT 38</div>
+                <p>(Incl. all standard features listed on the product page)</p>
+                <div class="item-price">AED 450,0000</div>
+            </div>
+            <div id="engineSection" class="order-item">
+                <div class="item-title">Engine Configuration</div>
+                <div id="engineDetails" class="item-details"></div>
+                <div id="enginePrice" class="item-price"></div>
+            </div>
+            <div id="navSection" class="order-item">
+                <div class="item-title">Navigation Package</div>
+                <div id="navDetails" class="item-details"></div>
+                <div id="navPrice" class="item-price"></div>
+            </div>
+            <div id="accessoriesSection" class="order-item">
+                <div class="item-title">Optional Accessories</div>
+                <div id="accessoriesDetails" class="item-details"></div>
+                <div id="accessoriesPrice" class="item-price"></div>
+            </div>
+            <div class="order-item total">
+                <div class="item-title">Total Price</div>
+                <div id="totalPrice" class="item-price"></div>
+            </div>
+        </div>
+
+        <!-- TideMaster Hunter 28 订单信息 -->
+        <div id="hunterOrderSummary" style="display: none;">
+            <div class="order-item">
+                <div class="item-title">Base Price for TIDEMASTER HUNTER 28</div>
+                <p>(Incl. all standard features listed on the product page)</p>
+                <div class="item-price">AED 300,000</div>
+            </div>
+            <div id="hunterEngineSection" class="order-item">
+                <div class="item-title">Engine Configuration</div>
+                <div id="hunterEngineDetails" class="item-details"></div>
+                <div id="hunterEnginePrice" class="item-price"></div>
+            </div>
+            <div id="hunterNavSection" class="order-item">
+                <div class="item-title">Navigation Package</div>
+                <div id="hunterNavDetails" class="item-details"></div>
+                <div id="hunterNavPrice" class="item-price"></div>
+            </div>
+            <div id="hunterAccessoriesSection" class="order-item">
+                <div class="item-title">Optional Accessories</div>
+                <div id="hunterAccessoriesDetails" class="item-details"></div>
+                <div id="hunterAccessoriesPrice" class="item-price"></div>
+            </div>
+            <div class="order-item total">
+                <div class="item-title">Total Price</div>
+                <div id="hunterTotalPrice" class="item-price"></div>
+            </div>
+        </div>
+
+        <!-- TideMaster Lounge 38 订单信息 -->
+        <div id="loungeOrderSummary" style="display: none;">
+            <div class="order-summary">
+                <div class="item-title">Base Price for TIDEMASTER LOUNGE 38</div>
+                <div class="item-price">695,000 AED</div>
+            </div>
+            <div id="loungeEngineSection" class="order-item">
+                <div class="item-title">Engine Options</div>
+                <div id="loungeEngineDetails" class="item-details"></div>
+                <div id="loungeEnginePrice" class="item-price"></div>
+            </div>
+            <div id="loungeNavSection" class="order-item">
+                <div class="item-title">Navigation Package</div>
+                <div id="loungeNavDetails" class="item-details"></div>
+                <div id="loungeNavPrice" class="item-price"></div>
+            </div>
+            <div id="loungeAccessoriesSection" class="order-item">
+                <div class="item-title">Accessories</div>
+                <div id="loungeAccessoriesDetails" class="item-details"></div>
+                <div id="loungeAccessoriesPrice" class="item-price"></div>
+            </div>
+            <div class="order-total">
+                <div class="item-title">Total Price</div>
+                <div id="loungeTotalPrice" class="item-price"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 联系方式部分 -->
+    <div id="contact" class="contact-form">
+        <h2 class="section-title">Submit Order with your choice and options via WhatsApp</h2>
+        <div class="company-contact-info">
+            <div class="contact-item">
+                <i class="fa fa-exclamation-triangle"></i>
+                <p>(Screenshot of the order summary is required)</p>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                    <p>+971 561018837</p>
+</div>
+            <div class="whatsapp-section">
+                <img src="images/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
+                <p>WhatsApp: +971 561018837</p>
+                <a href="https://wa.me/971561018837" target="_blank" rel="noopener" class="whatsapp-button">
+                    Chat with us on WhatsApp
+                </a>
+    </div>
+        </div>
+    </div>
+
+     <!-- 页脚 -->
+     <footer class="main-footer">
+        <div class="footer-content">
+        <div class="footer-section company-info">
+            <div class="footer-logo">
+                    <img src="images/Logo.jpg" alt="TideMaster Marine Technology">
+            </div>
+            <p class="company-desc">
+                UAE Dubai TideMaster Marine Technology specializes in developing high-quality aluminum yachts and fishing boats for local needs
+            </p>
+            </div>
+        <div class="footer-section contact-info">
+            <h3>Contact Us</h3>
+                <p>400-888-9999</p>
+                <p>UAE Company Code: 91000XX</p>
+                <p>Dubai Maritime City, 38-88, Gulf Innovation Center, 3rd Floor, Room 142</p>
+            </div>
+        <div class="footer-section connect">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-snapchat"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+                <p>&copy; 2024-2025 TideMaster Marine Technology</p>
+    </div>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+    // 获取URL参数
+    const params = new URLSearchParams(window.location.search);
+    const boatModel = params.get('model');
+    console.log('Boat Model:', boatModel);
+    console.log('All URL Parameters:', Object.fromEntries(params.entries()));
+
+    // 隐藏所有订单摘要
+    document.getElementById('catOrderSummary').style.display = 'none';
+    document.getElementById('hunterOrderSummary').style.display = 'none';
+    document.getElementById('loungeOrderSummary').style.display = 'none';
+
+    // 根据船型显示对应的订单摘要
+    if (boatModel === 'lounge') {
+        console.log('Displaying Lounge Order Summary');
+        document.getElementById('loungeOrderSummary').style.display = 'block';
+        displayLoungeOrderSummary(params);
+    } else if (boatModel === 'cat') {
+        document.getElementById('catOrderSummary').style.display = 'block';
+        displayCatOrderSummary(params);
+    } else if (boatModel === 'hunter') {
+        document.getElementById('hunterOrderSummary').style.display = 'block';
+        displayHunterOrderSummary(params);
+    } else {
+        console.error('Invalid or missing boat model parameter:', boatModel);
+    }
+});
+
+// 格式化价格的函数
+function formatPrice(price) {
+    return new Intl.NumberFormat('en-AE', {
+        style: 'currency',
+        currency: 'AED',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(price);
+}
+
+// TideMaster Cat 38 订单处理函数
+function displayCatOrderSummary(params) {
+    const basePrice = 420000;
+    let totalPrice = basePrice;
+
+    // 显示发动机配置
+    if (params.get('engine') && params.get('enginePrice')) {
+        document.getElementById('engineDetails').textContent = params.get('engine');
+        document.getElementById('enginePrice').textContent = formatPrice(parseInt(params.get('enginePrice')));
+        totalPrice += parseInt(params.get('enginePrice'));
+    }
+
+    // 显示导航系统
+    if (params.get('nav') && params.get('navPrice')) {
+        document.getElementById('navDetails').textContent = params.get('nav');
+        document.getElementById('navPrice').textContent = formatPrice(parseInt(params.get('navPrice')));
+        totalPrice += parseInt(params.get('navPrice'));
+    }
+
+    // 显示配件
+    if (params.get('accessories') && params.get('accessoriesPrice')) {
+        const accessories = JSON.parse(params.get('accessories'));
+        document.getElementById('accessoriesDetails').innerHTML = accessories.map(acc => 
+            `${acc.title}${acc.description ? ' - ' + acc.description : ''}`
+        ).join('<br>');
+        document.getElementById('accessoriesPrice').textContent = formatPrice(parseInt(params.get('accessoriesPrice')));
+        totalPrice += parseInt(params.get('accessoriesPrice'));
+    }
+
+    // 显示总价
+    document.getElementById('totalPrice').textContent = formatPrice(totalPrice);
+}
+
+// TideMaster Hunter 28 订单处理函数
+function displayHunterOrderSummary(params) {
+    const basePrice = 300000;
+    let totalPrice = basePrice;
+
+    // 显示发动机配置
+    if (params.get('engine') && params.get('enginePrice')) {
+        document.getElementById('hunterEngineDetails').textContent = params.get('engine');
+        document.getElementById('hunterEnginePrice').textContent = formatPrice(parseInt(params.get('enginePrice')));
+        totalPrice += parseInt(params.get('enginePrice'));
+    }
+
+    // 显示导航系统
+    if (params.get('nav') && params.get('navPrice')) {
+        document.getElementById('hunterNavDetails').textContent = params.get('nav');
+        document.getElementById('hunterNavPrice').textContent = formatPrice(parseInt(params.get('navPrice')));
+        totalPrice += parseInt(params.get('navPrice'));
+    }
+
+    // 显示配件
+    if (params.get('accessories') && params.get('accessoriesPrice')) {
+        const accessories = JSON.parse(params.get('accessories'));
+        document.getElementById('hunterAccessoriesDetails').innerHTML = accessories.map(acc => 
+            `${acc.title}${acc.description ? ' - ' + acc.description : ''}`
+        ).join('<br>');
+        document.getElementById('hunterAccessoriesPrice').textContent = formatPrice(parseInt(params.get('accessoriesPrice')));
+        totalPrice += parseInt(params.get('accessoriesPrice'));
+    }
+
+    // 显示总价
+    document.getElementById('hunterTotalPrice').textContent = formatPrice(totalPrice);
+}
+
+// TideMaster Lounge 38 订单处理函数
+function displayLoungeOrderSummary(params) {
+    console.log('Processing Lounge Order Summary');
+    const basePrice = 695000;
+    let totalPrice = basePrice;
+
+    try {
+        // 显示发动机配置
+        const engineData = params.get('engine');
+        const enginePrice = params.get('enginePrice');
+        console.log('Engine Data:', engineData);
+        console.log('Engine Price:', enginePrice);
+        
+        if (engineData && enginePrice) {
+            document.getElementById('loungeEngineDetails').innerHTML = engineData;
+            document.getElementById('loungeEnginePrice').textContent = formatPrice(parseInt(enginePrice));
+            totalPrice += parseInt(enginePrice);
+        } else {
+            console.warn('Missing engine data');
+            document.getElementById('loungeEngineDetails').innerHTML = '<p>No engine selected</p>';
+            document.getElementById('loungeEnginePrice').textContent = formatPrice(0);
+        }
+
+        // 显示导航系统
+        const navData = params.get('nav');
+        const navPrice = params.get('navPrice');
+        console.log('Navigation Data:', navData);
+        console.log('Navigation Price:', navPrice);
+        
+        if (navData && navPrice) {
+            document.getElementById('loungeNavDetails').innerHTML = navData;
+            document.getElementById('loungeNavPrice').textContent = formatPrice(parseInt(navPrice));
+            totalPrice += parseInt(navPrice);
+        } else {
+            console.warn('Missing navigation data');
+            document.getElementById('loungeNavDetails').innerHTML = '<p>No navigation package selected</p>';
+            document.getElementById('loungeNavPrice').textContent = formatPrice(0);
+        }
+
+        // 显示配件
+        const accessoriesData = params.get('accessories');
+        const accessoriesPrice = params.get('accessoriesPrice');
+        console.log('Accessories Data:', accessoriesData);
+        console.log('Accessories Price:', accessoriesPrice);
+        
+        if (accessoriesData && accessoriesPrice) {
+            try {
+                const accessories = JSON.parse(accessoriesData);
+                const accessoriesHtml = accessories.map(acc => {
+                    return `<div class="accessory-item">
+                        <div class="accessory-details">
+                            <strong>${acc.title}</strong>
+                            ${acc.description ? '<br>' + acc.description : ''}
+                    </div>
+                        <div class="accessory-price">${formatPrice(acc.price)}</div>
+                    </div>`;
+                }).join('');
+                
+                document.getElementById('loungeAccessoriesDetails').innerHTML = accessoriesHtml || '<p>No accessories selected</p>';
+                document.getElementById('loungeAccessoriesPrice').textContent = formatPrice(parseInt(accessoriesPrice));
+                totalPrice += parseInt(accessoriesPrice);
+            } catch (error) {
+                console.error('Error parsing accessories:', error);
+                document.getElementById('loungeAccessoriesDetails').innerHTML = '<p>Error parsing accessories</p>';
+                document.getElementById('loungeAccessoriesPrice').textContent = formatPrice(0);
+            }
+        } else {
+            document.getElementById('loungeAccessoriesDetails').innerHTML = '<p>No accessories selected</p>';
+            document.getElementById('loungeAccessoriesPrice').textContent = formatPrice(0);
+        }
+
+        // 显示总价
+        document.getElementById('loungeTotalPrice').textContent = formatPrice(totalPrice);
+        console.log('Final Total Price:', totalPrice);
+    } catch (error) {
+        console.error('Error in displayLoungeOrderSummary:', error);
+    }
+}
+</script>
+</body>
+</html>

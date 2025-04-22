@@ -731,23 +731,19 @@
 
     .table-header {
         display: grid;
-        grid-template-columns: 90px repeat(2, minmax(200px, 1fr)); /* 设置最小宽度确保内容显示 */
+        grid-template-columns: 120px repeat(6, 1fr); /* 7列布局：1列标题 + 6列套餐 */
         background: rgba(255, 255, 255, 0.05);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .table-row {
         display: grid;
-        grid-template-columns: 90px repeat(2, minmax(200px, 1fr)); /* 与header保持一致 */
+        grid-template-columns: 120px repeat(6, 1fr); /* 与header保持一致 */
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .table-row:last-child {
-        border-bottom: none;
-    }
-
     .row-header {
-        padding: 0.8rem;
+        padding: 1rem;
         font-weight: 500;
         background: rgba(255, 255, 255, 0.02);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -762,6 +758,10 @@
         text-align: center;
         font-weight: 600;
         border-right: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     .package-content {
@@ -776,29 +776,25 @@
         line-height: 1.4;
     }
 
-    .package-content:last-child,
-    .col-package:last-child {
-        border-right: none;
-    }
-
-    .empty-cell {
-        background: rgba(255, 255, 255, 0.02);
+    .package-price {
+        color: var(--primary-color);
+        font-weight: 600;
     }
 
     /* 移动端适配 */
     @media (max-width: 768px) {
         .nav-electronics-table {
-            margin: 0 1rem;
+            margin: 0;
         }
 
         .table-header,
         .table-row {
-            min-width: 700px; /* 增加最小宽度确保所有内容可见 */
+            min-width: 1000px; /* 确保在移动设备上可以水平滚动 */
         }
 
         /* 添加横向滚动提示 */
         .nav-electronics-table::before {
-            content: '← Scroll horizontally →';
+            content: '← 左右滑动查看更多选项 →';
             display: block;
             text-align: center;
             padding: 0.5rem;
@@ -807,16 +803,6 @@
             background: rgba(255, 255, 255, 0.05);
             margin-bottom: 0.5rem;
             border-radius: 4px;
-        }
-
-        .col-package {
-            padding: 0.8rem;
-            min-width: 200px; /* 确保每列有足够空间 */
-        }
-
-        .package-content {
-            padding: 0.8rem;
-            min-width: 200px;
         }
     }
 
@@ -1225,7 +1211,7 @@
         <div class="container">
             <!-- Logo -->
             <a href="../index.html" class="logo">
-                <img src="../images/Logo.jpg" alt="TIDEMASTER" class="logo-img">
+                <img src="../images/logo white.png" alt="TIDEMASTER" class="logo-img" style="height: 70px; width: auto;">
             </a>
 
             <!-- 主导航 -->
@@ -2090,8 +2076,7 @@
         <div id="contact" class="footer-content">
             <div class="footer-section company-info">
                 <div class="footer-logo">
-                    <img src="../images/Logo.jpg" alt="TideMaster Marine Technology" class="logo-img" style="max-width: 120px;">
-                    <span class="logo-text">TideMaster Marine Technology</span>
+                    <img src="../images/logo white.png" alt="TideMaster Marine Technology" class="logo-img" style="height: 80px; width: auto;">
                 </div>
                 <p class="company-desc">
                     UAE Dubai TideMaster Marine Technology specializes in developing high-quality aluminum yachts and fishing boats for local needs
@@ -2141,8 +2126,8 @@
             <div class="copyright">
                     <p>&copy; 2022-2025 TideMaster Marine Technology. All rights reserved.</p>
                     <ul class="legal-links">
-                        <li><a href="#disclaimer">Disclaimer</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="../policies.html#disclaimer">Disclaimer</a></li>
+                        <li><a href="../policies.html#privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
